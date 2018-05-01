@@ -11,27 +11,21 @@ body
     grid-template-areas: "a a a" "b b b" "c c c" "d d d"
     grid-template-rows: 1fr 1fr 1fr 2fr
     color: #daf6ff
-    // text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0)
     #message 
         height: 300px
         margin: 0 auto
         grid-area: d
         opacity: 1
         transition: opacity 1s ease-out
-        
         img
             height: 100%
             filter: brightness(0) invert(1)
-
     #time
         letter-spacing: 0.05em
         font-size: 150px
         padding: 5px 0
         grid-area: b
-
     #date 
         letter-spacing: 0.1em
         font-size: 100px
         grid-area: c
-.fade
-    opacity: 0 !important

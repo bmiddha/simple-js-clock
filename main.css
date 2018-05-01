@@ -35,6 +35,3 @@ body {
     letter-spacing: 0.1em;
     font-size: 100px;
     grid-area: c; }
-
-.fade {
-  opacity: 0 !important; }

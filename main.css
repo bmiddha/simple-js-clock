@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  background-color: #000000;
+  background-size: 100%;
+  -webkit-transition: background-color 5s ease-out;
+  -o-transition: background-color 5s ease-out;
+  transition: background-color 5s ease-out; }
+
+.wrapper {
+  font-family: 'Share Tech Mono', monospace;
+  color: #ffffff;
+  text-align: center;
+  display: grid;
+  grid-template-areas: "a a a" "b b b" "c c c" "d d d";
+  grid-template-rows: 1fr 1fr 1fr 2fr;
+  color: #daf6ff; }
+  .wrapper #message {
+    height: 300px;
+    margin: 0 auto;
+    grid-area: d;
+    opacity: 1;
+    -webkit-transition: opacity 1s ease-out;
+    -o-transition: opacity 1s ease-out;
+    transition: opacity 1s ease-out; }
+    .wrapper #message img {
+      height: 100%;
+      -webkit-filter: brightness(0) invert(1);
+      filter: brightness(0) invert(1); }
+  .wrapper #time {
+    letter-spacing: 0.05em;
+    font-size: 150px;
+    padding: 5px 0;
+    grid-area: b; }
+  .wrapper #date {
+    letter-spacing: 0.1em;
+    font-size: 100px;
+    grid-area: c; }
+
+.fade {
+  opacity: 0 !important; }

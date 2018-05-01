@@ -12,6 +12,7 @@ function startTime() {
     var year = today.getFullYear();
     min = addZero(min);
     sec = addZero(sec);
+    hour = addZero(hour);
     date = addZero(date);
     month = addZero(month);
     document.getElementById('time').innerHTML = hour + ":" + min + ":" + sec;

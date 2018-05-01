@@ -3,6 +3,7 @@ var images = ["http://flourishconf.com/2019/assets/images/tagline.png","http://f
 
 
 function startTime() {
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var today = new Date();
     var hour = today.getHours();
     var min = today.getMinutes();
@@ -10,13 +11,14 @@ function startTime() {
     var date = today.getDate();
     var month = today.getMonth() + 1;
     var year = today.getFullYear();
+    var day = days[today.getDay()];
     min = addZero(min);
     sec = addZero(sec);
     hour = addZero(hour);
     date = addZero(date);
     month = addZero(month);
     document.getElementById('time').innerHTML = hour + ":" + min + ":" + sec;
-    document.getElementById('date').innerHTML = month + "/" + date + "/" + year;
+    document.getElementById('date').innerHTML = day + "," + month + "/" + date + "/" + year;
     var timeFunction = setTimeout(startTime, 500);
 }
 function addZero(i) {

@@ -3,13 +3,17 @@ body
     background-color: #000000
     background-size: 100%
     transition: background-color 5s ease-out
+    background-image: url("asfalt-light.png")
+    background-attachment: fixed
+    background-repeat: repeat
+    background-size: 150px 150px
 .wrapper
     font-family: 'Share Tech Mono', monospace
     color: #ffffff
     text-align: center
     display: grid
     grid-template-areas: "a a a" "b b b" "c c c" "d d d"
-    grid-template-rows: 1fr 2fr 1fr 2fr
+    grid-template-rows: 0 4fr 2fr 4fr
     color: #daf6ff
     #message 
         height: 300px
@@ -22,10 +26,10 @@ body
             filter: brightness(0) invert(1)
     #time
         letter-spacing: 0.05em
-        font-size: 300px
+        font-size: 275px
         padding: 5px 0
         grid-area: b
     #date 
         letter-spacing: 0.1em
-        font-size: 125px
+        font-size: 100px
         grid-area: c

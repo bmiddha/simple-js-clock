@@ -12,7 +12,7 @@ body {
   text-align: center;
   display: grid;
   grid-template-areas: "a a a" "b b b" "c c c" "d d d";
-  grid-template-rows: 1fr 1fr 1fr 2fr;
+  grid-template-rows: 1fr 2fr 1fr 2fr;
   color: #daf6ff; }
   .wrapper #message {
     height: 300px;
@@ -28,10 +28,10 @@ body {
       filter: brightness(0) invert(1); }
   .wrapper #time {
     letter-spacing: 0.05em;
-    font-size: 150px;
+    font-size: 300px;
     padding: 5px 0;
     grid-area: b; }
   .wrapper #date {
     letter-spacing: 0.1em;
-    font-size: 100px;
+    font-size: 125px;
     grid-area: c; }

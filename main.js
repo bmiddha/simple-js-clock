@@ -47,7 +47,7 @@ function cycleImages() {
     fadeIn(document.querySelector("#message>img"));
     document.querySelector("#message>img").src = images[counter%images.length];
     counter++;
-    setTimeout(cycleImages,10000)
+    setTimeout(cycleImages,20000)
 }
 
 function colorChanger(){

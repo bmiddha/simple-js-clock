@@ -46,3 +46,57 @@ body {
     grid-area: e;
     font-size: 90px;
     text-align: left; }
+
+@media (max-width: 1600px) {
+  .wrapper #time {
+    font-size: 220px; }
+  .wrapper #date {
+    font-size: 75px; }
+  .wrapper #weather {
+    font-size: 65px; }
+  .wrapper #message {
+    height: 200px; } }
+
+@media (max-width: 1200px) {
+  .wrapper #time {
+    font-size: 175px; }
+  .wrapper #date {
+    font-size: 55px; }
+  .wrapper #weather {
+    font-size: 45px; }
+  .wrapper #message {
+    height: 150px; } }
+
+@media (max-width: 930px) {
+  .wrapper #time {
+    font-size: 135px; }
+  .wrapper #date {
+    font-size: 45px; }
+  .wrapper #weather {
+    font-size: 40px; }
+  .wrapper #message {
+    height: 120px; } }
+
+@media (max-width: 650px) {
+  .wrapper {
+    grid-template-areas: "a a a" "b b b" "c c c" "e e e" "d d d";
+    grid-template-rows: 0 3fr 2fr 4fr 3fr; }
+    .wrapper #time {
+      font-size: 85px; }
+    .wrapper #date {
+      font-size: 30px; }
+    .wrapper #weather {
+      font-size: 35px;
+      text-align: center; }
+    .wrapper #message {
+      height: 120px; } }
+
+@media (max-width: 420px) {
+  .wrapper #time {
+    font-size: 55px; }
+  .wrapper #date {
+    font-size: 20px; }
+  .wrapper #weather {
+    font-size: 30px; }
+  .wrapper #message {
+    height: 90px; } }

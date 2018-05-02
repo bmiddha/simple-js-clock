@@ -13,6 +13,7 @@ function getWeather(){
             document.querySelector("#weather").innerHTML = w.query.results.channel.item.condition.temp + "&#176;F<br>" +  w.query.results.channel.item.condition.text;
         };
     }
+    setTimeout(getWeather,1000000)
 }
 
 
@@ -37,7 +38,7 @@ function startTime() {
     // ampm = (hour >= 12) ? "PM" : "AM";
     document.getElementById('time').innerHTML = hour + ":" + min + ":" + sec;
     document.getElementById('date').innerHTML = day + "," + month + "/" + date + "/" + year;
-    var timeFunction = setTimeout(startTime, 500);
+    setTimeout(startTime, 500);
 }
 function addZero(i) {
     if (i < 10) {i = "0" + i};

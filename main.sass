@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono')
+// @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono')
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono')
 @import url('https://fonts.googleapis.com/css?family=Montserrat')
 body
     margin: 0
@@ -8,9 +9,11 @@ body
     background-image: url("asfalt-light.png")
     background-attachment: fixed
     background-repeat: repeat
-    background-size: 190px 190px
+    background-size: 600px
+    pointer-events: none
+    user-select: none
 .wrapper
-    font-family: Montserrat, sans-serif
+    font-family: Montserrat, sans-serif    
     color: #ffffff
     text-align: center
     display: grid
@@ -27,9 +30,9 @@ body
             height: 100%
             filter: brightness(0) invert(1)
     #time
-        font-family: 'Share Tech Mono', monospace    
+        font-family: 'Roboto Mono', monospace   
         letter-spacing: 0.05em
-        font-size: 300px
+        font-size: 280px
         padding: 5px 0
         grid-area: b
     #date 
@@ -45,7 +48,7 @@ body
 @media (max-width: 1600px)
     .wrapper
         #time
-            font-size: 220px
+            font-size: 200px
         #date
             font-size: 75px
         #weather
@@ -57,7 +60,7 @@ body
 @media (max-width: 1200px)
     .wrapper
         #time
-            font-size: 175px
+            font-size: 160px
         #date
             font-size: 55px
         #weather
@@ -68,7 +71,7 @@ body
 @media (max-width: 930px)
     .wrapper
         #time
-            font-size: 135px
+            font-size: 120px
         #date
             font-size: 45px
         #weather
@@ -81,7 +84,7 @@ body
         grid-template-areas: "a a a" "b b b" "c c c" "e e e" "d d d"
         grid-template-rows: 0 3fr 2fr 4fr 3fr
         #time
-            font-size: 85px
+            font-size: 78px
         #date
             font-size: 30px
         #weather
@@ -93,7 +96,7 @@ body
 @media (max-width: 420px)
     .wrapper
         #time
-            font-size: 55px
+            font-size: 50px
         #date
             font-size: 20px
         #weather

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono')
 body
     margin: 0
     background-color: #000000
@@ -6,15 +7,14 @@ body
     background-image: url("asfalt-light.png")
     background-attachment: fixed
     background-repeat: repeat
-    background-size: 150px 150px
+    background-size: 190px 190px
 .wrapper
     font-family: 'Share Tech Mono', monospace
     color: #ffffff
     text-align: center
     display: grid
-    grid-template-areas: "a a a" "b b b" "c c c" "d d d"
+    grid-template-areas: "a a a" "b b b" "c c c" "d d e"
     grid-template-rows: 0 4fr 2fr 4fr
-    color: #daf6ff
     #message 
         height: 300px
         margin: 0 auto
@@ -26,10 +26,15 @@ body
             filter: brightness(0) invert(1)
     #time
         letter-spacing: 0.05em
-        font-size: 275px
+        font-size: 300px
         padding: 5px 0
         grid-area: b
     #date 
         letter-spacing: 0.1em
-        font-size: 100px
+        font-size: 120px
         grid-area: c
+    #weather
+        grid-area: e
+        font-size: 100px
+        text-align: left
+        

@@ -44,5 +44,5 @@ body {
     grid-area: c; }
   .wrapper #weather {
     grid-area: e;
-    font-size: 75px;
+    font-size: 90px;
     text-align: left; }

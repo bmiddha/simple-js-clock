@@ -32,7 +32,7 @@ function startTime() {
     let month = today.getMonth() + 1;
     let year = today.getFullYear();
     let day = days[today.getDay()];
-    hour = (hour >= 12) ? (hour - 12) : hour;
+    hour = (hour > 12) ? (hour - 12) : hour;
     min = addZero(min);
     sec = addZero(sec);
     hour = addZero(hour);

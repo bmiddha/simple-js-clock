@@ -23,7 +23,7 @@ body {
   text-align: center;
   display: grid;
   grid-template-areas: "a a a" "b b b" "c c c" "d d e";
-  grid-auto-columns: 1fr 1fr 1fr;
+  grid-auto-columns: 1fr 1fr 1.5fr;
   grid-template-rows: 0 4fr 2fr 4fr; }
   .wrapper #message {
     height: 300px;
@@ -51,6 +51,8 @@ body {
     grid-area: e;
     font-size: 90px;
     text-align: left; }
+    .wrapper #weather p {
+      margin: 0; }
 
 @media (max-width: 1600px) {
   .wrapper #time {

@@ -15,7 +15,8 @@ function getWeather(){
             let temp = w.query.results.channel.item.condition.temp;
             let text = w.query.results.channel.item.condition.text;
             let metric = Math.round((temp - 32) * (5/9));
-            document.querySelector("#weather").innerHTML = text + "<br>Feels Like<br>" + temp + "&#176;F|" + metric + "&#176;C";
+            document.querySelector("#weather-condition").innerHTML = text
+            document.querySelector("#weather-temperature").innerHTML = "Feels Like<br>" + temp + "&#176;F|" + metric + "&#176;C";
         }
     }
     setTimeout(getWeather,100000);

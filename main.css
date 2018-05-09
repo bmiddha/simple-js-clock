@@ -49,7 +49,7 @@ body {
     grid-area: c; }
   .wrapper #weather {
     grid-area: e;
-    font-size: 90px;
+    font-size: 80px;
     text-align: left; }
     .wrapper #weather p {
       margin: 0; }

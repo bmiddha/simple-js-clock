@@ -1,7 +1,7 @@
-var colors = ["#303030", "#01579B","#006064","#304FFE","#004D40"];
-var images = ["http://flourishconf.com/2019/assets/images/tagline.png","http://flourishconf.com/2019/assets/images/logo.png","https://acm.cs.uic.edu/wiki/_media/logos:website-logo-replacement-2017.png", "https://lug.cs.uic.edu/LUG_logo_Non-UIC.png"];
-var city = 12778674;
-var counter = 0;
+const colors = ["#303030", "#01579B","#006064","#304FFE","#004D40"];
+const images = ["http://flourishconf.com/2019/assets/images/tagline.png","http://flourishconf.com/2019/assets/images/logo.png","https://acm.cs.uic.edu/wiki/_media/logos:website-logo-replacement-2017.png", "https://lug.cs.uic.edu/LUG_logo_Non-UIC.png"];
+const city = 12778674;
+let counter = 0;
 
 function getApiData(){
 	let xhr = new XMLHttpRequest();
@@ -19,7 +19,7 @@ function getApiData(){
 			trainData = data.Train;
 			weatherData = data.Weather;
 			document.querySelector("#bus").innerHTML = "";
-			for(var i=0;i<busData.length;i++){
+			for(let i=0;i<busData.length;i++){
 				// console.log(busData[i][0].tmstmp);
 				let timeNow = new Date();
 				let eta = Math.abs((busData[i][0].prdtm.replace(":","")) - (addZero(timeNow.getHours()) +""+ addZero(timeNow.getMinutes())));

@@ -1,6 +1,7 @@
 require("dotenv").config();
 var http = require("http");
 var express = require("express");
+var path = require("path");
 
 const trainApiKey = process.env.CTA_TRAIN_API_KEY;
 const busApiKey = process.env.CTA_BUS_API_KEY;
@@ -43,19 +44,24 @@ function getBus() {
 		let busTimeStamp = [];
 		let busExport = [];
 		getFromUrl(busUrl).then((result) => {
-			let busJson = JSON.parse(result);
-			for (i=0;i<busJson["bustime-response"]["prd"].length;i++) {
-				busRoute[i] = busJson["bustime-response"]["prd"][i]["rt"];
-				busStopName[i] = busJson["bustime-response"]["prd"][i]["stpnm"];
-				busDirection[i] = busJson["bustime-response"]["prd"][i]["rtdir"]; 
-				busPredictedTime[i] = busJson["bustime-response"]["prd"][i]["prdtm"].split(" ")[1];
-				busTimeStamp[i] = busJson["bustime-response"]["prd"][i]["tmstmp"].split(" ")[1];
+			let busJson = JSON.parse(result)["bustime-response"];
+			if (busJson.hasOwnProperty("error")) {
+				// TODO
+				console.log("Error response on bus " + busStops[i]);
+				return;
+			}
+			for (let j=0;j<busJson["prd"].length;j++) {
+				busRoute[j] = busJson["prd"][j]["rt"];
+				busStopName[j] = busJson["prd"][j]["stpnm"];
+				busDirection[j] = busJson["prd"][j]["rtdir"]; 
+				busPredictedTime[j] = busJson["prd"][j]["prdtm"].split(" ")[j];
+				busTimeStamp[j] = busJson["prd"][j]["tmstmp"].split(" ")[j];
 				let data = {
-					stop: busStopName[i],
-					route: busRoute[i],
-					dir: busDirection[i],
-					prdtm: busPredictedTime[i],
-					tmstmp: busTimeStamp[i],
+					stop: busStopName[j],
+					route: busRoute[j],
+					dir: busDirection[j],
+					prdtm: busPredictedTime[j],
+					tmstmp: busTimeStamp[j],
 				};
 				busExport.push(data);
 			}
@@ -165,6 +171,7 @@ app.get("/api/bus", function(req, res) {
 	busStops = bus.split(",") ;
 	res.send(o[busKey]);
 });
+//app.get("/api/bus/:busnum",)
 app.get("/api/train", function(req, res) {
 	let train = req.param("train");
 	trainStations = train.split(",") ;
@@ -175,6 +182,8 @@ app.get("/api/weather", function(req, res) {
 	location = city;
 	res.send(o[weatherKey]);
 });
+
+app.use(express.static(path.join(__dirname + "/site")));
 
 // bus     : http://localhost:8080/api/bus?bus=6700,6627,307,332,4640,14487,6347,206
 // train   : http://localhost:8080/api/train?train=40350

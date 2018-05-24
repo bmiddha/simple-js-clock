@@ -157,28 +157,27 @@ app.use(function(req, res, next) {
 });
 
 app.get("/api/all", function(req, res) {
-	let bus = req.param("bus");
-	let train = req.param("train");
-	let city = req.param("city");
-	busStops = bus.split(",") ;
+	let bus = req.query.bus;
+	let train = req.query.train;
+	let city = req.query.city;
+	busStops = bus.split(",");
 	trainStations = train.split(",") ;
 	location = city;
 	res.send(o);
 });
 
 app.get("/api/bus", function(req, res) {
-	let bus = req.param("bus");
-	busStops = bus.split(",") ;
+	let bus = req.query.bus;
+	busStops = bus.split(",");
 	res.send(o[busKey]);
 });
-//app.get("/api/bus/:busnum",)
 app.get("/api/train", function(req, res) {
-	let train = req.param("train");
-	trainStations = train.split(",") ;
+	let train = req.query.train;
+	trainStations = train.split(",");
 	res.send(o[trainKey]);
 });
 app.get("/api/weather", function(req, res) {
-	let city = req.param("city");
+	let city = req.query.city;
 	location = city;
 	res.send(o[weatherKey]);
 });

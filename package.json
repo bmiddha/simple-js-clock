@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "repository": {
@@ -23,7 +23,7 @@
     "express": "^4.16.3"
   },
   "devDependencies": {
-    "eslint": "^4.19.1"
+    "eslint": "^4.19.1",
     "nodemon": "^1.17.5"
   }
 }

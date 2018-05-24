@@ -1,0 +1,27 @@
+{
+  "name": "simple-js-clock",
+  "version": "0.2.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmiddha/simple-js-clock.git"
+  },
+  "author": "Bharat Middha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bmiddha/simple-js-clock/issues"
+  },
+  "homepage": "https://github.com/bmiddha/simple-js-clock#readme",
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1"
+  }
+}

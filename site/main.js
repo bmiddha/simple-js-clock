@@ -22,16 +22,20 @@ function getApiData(){
 			for(let i=0;i<busData.length;i++){
 				// console.log(busData[i][0].tmstmp);
 				let timeNow = new Date();
-				let eta = Math.abs((busData[i][0].prdtm.replace(":","")) - (addZero(timeNow.getHours()) +""+ addZero(timeNow.getMinutes())));
-				console.log();
-				document.querySelector("#bus").innerHTML += busData[i][0].route + " " + busData[i][0].dir + " in " + eta + " min<br>";
+				let eta;
+				for(let j=0;j<busData[i].length;j++)
+				{
+					eta = Math.abs((busData[i][j].prdtm.replace(":","")) - (addZero(timeNow.getHours()) +""+ addZero(timeNow.getMinutes())));
+					document.querySelector("#bus").innerHTML += busData[i][j].route + " " + busData[i][j].dir + " in " + eta + " min<br>";
+				}
+				// console.log(eta);
 			}
             
 			document.querySelector("#weather-condition").innerHTML = weatherData[0][0].forecast.main[0];
 			document.querySelector("#weather-temperature").innerHTML = "Feels Like<br>" + weatherData[0][0].temp + "K";
 		}
 	};
-	setTimeout(getApiData,15000);
+	setTimeout(getApiData,3000);
 }
 
 

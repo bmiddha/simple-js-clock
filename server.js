@@ -1,7 +1,7 @@
 require("dotenv").config();
-var http = require("http");
-var express = require("express");
-var path = require("path");
+const http = require("http");
+const express = require("express");
+const path = require("path");
 
 const trainApiKey = process.env.CTA_TRAIN_API_KEY;
 const busApiKey = process.env.CTA_BUS_API_KEY;
@@ -54,8 +54,8 @@ function getBus() {
 				busRoute[j] = busJson["prd"][j]["rt"];
 				busStopName[j] = busJson["prd"][j]["stpnm"];
 				busDirection[j] = busJson["prd"][j]["rtdir"]; 
-				busPredictedTime[j] = busJson["prd"][j]["prdtm"].split(" ")[j];
-				busTimeStamp[j] = busJson["prd"][j]["tmstmp"].split(" ")[j];
+				busPredictedTime[j] = busJson["prd"][j]["prdtm"].split(" ")[1];
+				busTimeStamp[j] = busJson["prd"][j]["tmstmp"].split(" ")[1];
 				let data = {
 					stop: busStopName[j],
 					route: busRoute[j],
@@ -145,7 +145,7 @@ function getData() {
 		o[trainKey] = [];
 		o[weatherKey] = [];
 		getData();
-	}, 15000);
+	}, 10000);
 }
 
 getData();

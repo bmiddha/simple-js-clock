@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="main.css">
-    <title>Document</title>
+    <title>Not So Simple JS Clock</title>
 </head>
 <body onload="startTime()" class="#body">
     <div class="wrapper">
@@ -13,8 +13,22 @@
         <div id="date"></div>
     
         <div id="message">
-            <div id="bus"></div>
-            <div id="train"></div>
+            <div id="cta">
+                <ul id="bus">
+                    <li>
+                        <span class="route"></span>
+                        <span class="direction"></span>
+                        <span class="eta"></span>
+                    </li>
+                </ul>
+                <ul id="train">
+                    <li>
+                        <span class="route"></span>
+                        <span class="direction"></span>
+                        <span class="eta"></span>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div id="weather">
             <p id="weather-condition"></p>

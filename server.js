@@ -27,8 +27,9 @@ function getFromUrl(url) {
 function getCtaBus(busStop) {
 	return new Promise((resolve, reject) => {
 		let busUrl = "http://ctabustracker.com/bustime/api/v2/getpredictions?key=" + busApiKey + "&stpid=" + busStop + "&format=json";
+		// console.log(busUrl);
 		getFromUrl(busUrl).then((result) => {
-			let busJson = JSON.parse(result)["bustime-response"];
+			let busJson = JSON.parse(result);
 			if (busJson.hasOwnProperty("error")) {
 				resolve("Error response on bus stop " + busStop);
 			}
@@ -39,7 +40,7 @@ function getCtaBus(busStop) {
 
 function getCtaTrain(trainStation) {
 	return new Promise((resolve, reject) => {
-		let trainUrl = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=" + trainApiKey + "&mapid=" + trainStation + "&max=2&outputType=JSON";
+		let trainUrl = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=" + trainApiKey + "&mapid=" + trainStation + "&max=5&outputType=JSON";
 		getFromUrl(trainUrl).then((result) => {
 			let trainJson = JSON.parse(result);
 			if (trainJson.hasOwnProperty("error")) {

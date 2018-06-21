@@ -96,7 +96,7 @@ function getData() {
 		document.querySelector("#weather-condition").innerHTML = result.weather[0].main;
 		document.querySelector("#weather-temperature").innerHTML = tempF + "&#176;F | " + tempC + "&#176;C";
 	});
-	setTimeout(getData, 120000);
+	setTimeout(getData, 60000);
 }
 
 colorChanger();

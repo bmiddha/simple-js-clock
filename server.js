@@ -1,7 +1,6 @@
 require("dotenv").config();
 const http = require("http");
 const express = require("express");
-const path = require("path");
 const trainApiKey = process.env.CTA_TRAIN_API_KEY;
 const busApiKey = process.env.CTA_BUS_API_KEY;
 const openWeatherApiKey = process.env.OPEN_WEATHER_MAP_API_KEY;
@@ -86,4 +85,4 @@ app.get("/api/weather", (req, res) => {
 	});
 });
 
-app.use(express.static(path.join(__dirname + "/site")));
+app.use(express.static("public"));

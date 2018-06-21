@@ -23,20 +23,32 @@ body {
   text-align: center;
   display: grid;
   grid-template-areas: "a a a" "b b b" "c c c" "d d e";
-  grid-auto-columns: 1fr 1fr 1.5fr;
-  grid-template-rows: 0 4fr 2fr 4fr; }
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0 3fr 1fr 5fr; }
   .wrapper #message {
     height: 300px;
-    margin: 0 auto;
     grid-area: d;
     opacity: 1;
     -webkit-transition: opacity 1s ease-out;
     -o-transition: opacity 1s ease-out;
     transition: opacity 1s ease-out; }
-    .wrapper #message img {
-      height: 100%;
-      -webkit-filter: brightness(0) invert(1);
-      filter: brightness(0) invert(1); }
+    .wrapper #message #bus {
+      clear: both; }
+      .wrapper #message #bus li {
+        display: none; }
+      .wrapper #message #bus li:nth-child(-n+8) {
+        display: list-item; }
+    .wrapper #message #bus, .wrapper #message #train {
+      clear: both;
+      font-size: 45px; }
+      .wrapper #message #bus li, .wrapper #message #train li {
+        padding: 5px;
+        list-style: none;
+        border: 1px solid;
+        min-width: 510px;
+        float: left; }
+        .wrapper #message #bus li i, .wrapper #message #bus li .route, .wrapper #message #bus li .direction, .wrapper #message #train li i, .wrapper #message #train li .route, .wrapper #message #train li .direction {
+          margin-right: 5px; }
   .wrapper #time {
     font-family: 'Roboto Mono', monospace;
     letter-spacing: 0.05em;
@@ -53,10 +65,6 @@ body {
     text-align: left; }
     .wrapper #weather p {
       margin: 0; }
-  .wrapper #bus li {
-    display: none; }
-  .wrapper #bus li:nth-child(-n+10) {
-    display: list-item; }
 
 @media (max-width: 1600px) {
   .wrapper #time {

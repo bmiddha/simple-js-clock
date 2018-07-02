@@ -72,8 +72,8 @@ function getData() {
 			let prdTime = new Date(timeFromApi.slice(0,4)+"/"+timeFromApi.slice(4,6)+"/"+timeFromApi.slice(6,16));
 			// let eta = Math.floor(Math.abs(prdTime - timeNow)/1000/60);
 			// document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir.slice(0,1) + "</span><span class=eta>" + eta + " min</span></li>";
-			let arrivalTime = ((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours()) + ":" + prdTime.getMinutes();
-			document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir.slice(0,1) + "</span><span class=eta>" + arrivalTime + " </span></li>";
+			let arrivalTime = addZero(((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours())) + ":" + addZero(prdTime.getMinutes());
+			document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir + "</span><span class=eta>" + arrivalTime + " </span></li>";
 		}
 	});
 	document.querySelector("#train").innerHTML = "";
@@ -84,7 +84,7 @@ function getData() {
 				let prdTime = new Date(result.ctatt.eta[j].arrT);
 				// let eta = Math.floor(Math.abs(prdTime - timeNow)/1000/60);
 				// document.querySelector("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + eta + " min<span></li>";
-				let arrivalTime = ((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours()) + ":" + prdTime.getMinutes();
+				let arrivalTime = addZero(((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours())) + ":" + addZero(prdTime.getMinutes());
 				document.querySelector("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + arrivalTime + " <span></li>";
 			}
 		});
@@ -93,11 +93,13 @@ function getData() {
 		let temp = result.main.temp;
 		let tempF = Math.round(temp * 9 / 5 - 459.67);
 		let tempC = Math.round(temp - 273.15);
+		console.log(result)
+		document.querySelector('#weather-icon').className = "owf owf-" + result.weather[0].id + "-d"
 		document.querySelector("#weather-condition").innerHTML = result.weather[0].main;
-		document.querySelector("#weather-temperature").innerHTML = tempF + "&#176;F | " + tempC + "&#176;C";
+		document.querySelector("#weather-temperature").innerHTML = tempF + "&#176;F<br>" + tempC + "&#176;C";
 	});
 	setTimeout(getData, 60000);
 }
 
-colorChanger();
+// colorChanger();
 getData();

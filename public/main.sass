@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono')
 @import url('https://fonts.googleapis.com/css?family=Montserrat')
-// @import url('fa/fontawesome-all.min.css')
 body
     margin: 0
     background-color: #000000
@@ -12,47 +11,59 @@ body
     background-size: 600px
     pointer-events: none
     user-select: none
+    height: 1080px
+    width: 1920px
+    overflow: hidden
 .wrapper
-    font-family: Montserrat, sans-serif    
+    font-family: Montserrat, sans-serif
     color: #ffffff
     text-align: center
     display: grid
     grid-template-areas: "a a a" "b b b" "c c c" "d d e"
-    grid-template-columns: 1fr 1fr 1fr
+    grid-template-columns: 1fr 1fr 0.5fr
     grid-template-rows: 0 3fr 1fr 5fr
-    #message 
-        height: 300px
+
+    #message
+        margin-left: 50px
         grid-area: d
-        opacity: 1
-        transition: opacity 1s ease-out
-        // img
-        //     height: 100%
-        //     filter: brightness(0) invert(1)
         #bus
             clear: both
             li
                 display: none
-            li:nth-child(-n+8)
+                background: #aa2222
+            li:nth-child(-n+6)
+                display: list-item
+        #train
+            clear: both
+            li
+                display: none
+                background: #2222aa
+            li:nth-child(-n+4)
                 display: list-item
         #bus,#train
             clear: both
-            font-size: 45px
+            padding: 0
+            font-size: 53px
             li
-                padding: 5px
+                padding: 10px
                 list-style: none
                 border: 1px solid
-                // width: 45%
-                min-width: 510px
+                min-width: 715px
                 float: left
                 i,.route,.direction
                     margin-right: 5px
+                    float: left
+                    padding: 0 10px
+                .eta
+                    float: right
+                    font-family: 'Roboto Mono', monospace
     #time
-        font-family: 'Roboto Mono', monospace   
+        font-family: 'Roboto Mono', monospace
         letter-spacing: 0.05em
         font-size: 280px
         padding: 5px 0
         grid-area: b
-    #date 
+    #date
         letter-spacing: 0.1em
         font-size: 100px
         grid-area: c
@@ -60,64 +71,70 @@ body
         grid-area: e
         font-size: 80px
         text-align: left
-        p
-            margin: 0
+        margin-right: 50px
+        margin-top: 40px
+        p, i
+            text-align: right
+            margin: 0 10px
+            width: 100%
+        i
+            font-size: 150px
 
-@media (max-width: 1600px)
-    .wrapper
-        #time
-            font-size: 200px
-        #date
-            font-size: 75px
-        #weather
-            font-size: 65px
-        #message
-            height: 200px
+// @media (max-width: 1600px)
+//     .wrapper
+//         #time
+//             font-size: 200px
+//         #date
+//             font-size: 75px
+//         #weather
+//             font-size: 65px
+//         #message
+//             height: 200px
 
 
-@media (max-width: 1200px)
-    .wrapper
-        #time
-            font-size: 160px
-        #date
-            font-size: 55px
-        #weather
-            font-size: 45px
-        #message
-            height: 150px
+// @media (max-width: 1200px)
+//     .wrapper
+//         #time
+//             font-size: 160px
+//         #date
+//             font-size: 55px
+//         #weather
+//             font-size: 45px
+//         #message
+//             height: 150px
 
-@media (max-width: 930px)
-    .wrapper
-        #time
-            font-size: 120px
-        #date
-            font-size: 45px
-        #weather
-            font-size: 40px
-        #message
-            height: 120px
+// @media (max-width: 930px)
+//     .wrapper
+//         #time
+//             font-size: 120px
+//         #date
+//             font-size: 45px
+//         #weather
+//             font-size: 40px
+//         #message
+//             height: 120px
 
-@media (max-width: 650px)
-    .wrapper
-        grid-template-areas: "a a a" "b b b" "c c c" "e e e" "d d d"
-        grid-template-rows: 0 3fr 2fr 4fr 3fr
-        #time
-            font-size: 78px
-        #date
-            font-size: 30px
-        #weather
-            font-size: 35px
-            text-align: center
-        #message
-            height: 120px
+// @media (max-width: 650px)
+//     .wrapper
+//         grid-template-areas: "a a a" "b b b" "c c c" "e e e" "d d d"
+//         grid-template-rows: 0 3fr 2fr 4fr 3fr
+//         #time
+//             font-size: 78px
+//         #date
+//             font-size: 30px
+//         #weather
+//             font-size: 35px
+//             text-align: center
+//         #message
+//             height: 120px
 
-@media (max-width: 420px)
-    .wrapper
-        #time
-            font-size: 50px
-        #date
-            font-size: 20px
-        #weather
-            font-size: 30px
-        #message
-            height: 90px
+// @media (max-width: 420px)
+//     .wrapper
+//         #time
+//             font-size: 50px
+//         #date
+//             font-size: 20px
+//         #weather
+//             font-size: 30px
+//         #message
+//             height: 90px

@@ -15,7 +15,10 @@ body {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
+  user-select: none;
+  height: 1080px;
+  width: 1920px;
+  overflow: hidden; }
 
 .wrapper {
   font-family: Montserrat, sans-serif;
@@ -23,32 +26,42 @@ body {
   text-align: center;
   display: grid;
   grid-template-areas: "a a a" "b b b" "c c c" "d d e";
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 0.5fr;
   grid-template-rows: 0 3fr 1fr 5fr; }
   .wrapper #message {
-    height: 300px;
-    grid-area: d;
-    opacity: 1;
-    -webkit-transition: opacity 1s ease-out;
-    -o-transition: opacity 1s ease-out;
-    transition: opacity 1s ease-out; }
+    margin-left: 50px;
+    grid-area: d; }
     .wrapper #message #bus {
       clear: both; }
       .wrapper #message #bus li {
-        display: none; }
-      .wrapper #message #bus li:nth-child(-n+8) {
+        display: none;
+        background: #aa2222; }
+      .wrapper #message #bus li:nth-child(-n+6) {
+        display: list-item; }
+    .wrapper #message #train {
+      clear: both; }
+      .wrapper #message #train li {
+        display: none;
+        background: #2222aa; }
+      .wrapper #message #train li:nth-child(-n+4) {
         display: list-item; }
     .wrapper #message #bus, .wrapper #message #train {
       clear: both;
-      font-size: 45px; }
+      padding: 0;
+      font-size: 53px; }
       .wrapper #message #bus li, .wrapper #message #train li {
-        padding: 5px;
+        padding: 10px;
         list-style: none;
         border: 1px solid;
-        min-width: 510px;
+        min-width: 715px;
         float: left; }
         .wrapper #message #bus li i, .wrapper #message #bus li .route, .wrapper #message #bus li .direction, .wrapper #message #train li i, .wrapper #message #train li .route, .wrapper #message #train li .direction {
-          margin-right: 5px; }
+          margin-right: 5px;
+          float: left;
+          padding: 0 10px; }
+        .wrapper #message #bus li .eta, .wrapper #message #train li .eta {
+          float: right;
+          font-family: 'Roboto Mono', monospace; }
   .wrapper #time {
     font-family: 'Roboto Mono', monospace;
     letter-spacing: 0.05em;
@@ -62,60 +75,12 @@ body {
   .wrapper #weather {
     grid-area: e;
     font-size: 80px;
-    text-align: left; }
-    .wrapper #weather p {
-      margin: 0; }
-
-@media (max-width: 1600px) {
-  .wrapper #time {
-    font-size: 200px; }
-  .wrapper #date {
-    font-size: 75px; }
-  .wrapper #weather {
-    font-size: 65px; }
-  .wrapper #message {
-    height: 200px; } }
-
-@media (max-width: 1200px) {
-  .wrapper #time {
-    font-size: 160px; }
-  .wrapper #date {
-    font-size: 55px; }
-  .wrapper #weather {
-    font-size: 45px; }
-  .wrapper #message {
-    height: 150px; } }
-
-@media (max-width: 930px) {
-  .wrapper #time {
-    font-size: 120px; }
-  .wrapper #date {
-    font-size: 45px; }
-  .wrapper #weather {
-    font-size: 40px; }
-  .wrapper #message {
-    height: 120px; } }
-
-@media (max-width: 650px) {
-  .wrapper {
-    grid-template-areas: "a a a" "b b b" "c c c" "e e e" "d d d";
-    grid-template-rows: 0 3fr 2fr 4fr 3fr; }
-    .wrapper #time {
-      font-size: 78px; }
-    .wrapper #date {
-      font-size: 30px; }
-    .wrapper #weather {
-      font-size: 35px;
-      text-align: center; }
-    .wrapper #message {
-      height: 120px; } }
-
-@media (max-width: 420px) {
-  .wrapper #time {
-    font-size: 50px; }
-  .wrapper #date {
-    font-size: 20px; }
-  .wrapper #weather {
-    font-size: 30px; }
-  .wrapper #message {
-    height: 90px; } }
+    text-align: left;
+    margin-right: 50px;
+    margin-top: 40px; }
+    .wrapper #weather p, .wrapper #weather i {
+      text-align: right;
+      margin: 0 10px;
+      width: 100%; }
+    .wrapper #weather i {
+      font-size: 150px; }

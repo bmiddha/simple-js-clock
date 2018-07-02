@@ -1,4 +1,3 @@
-const colors = ["#303030", "#01579B", "#006064", "#304FFE", "#004D40"];
 const busStops = ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"];
 const trainStations = ["40350"];
 const city = "Chicago";
@@ -58,11 +57,6 @@ function getRandomInt(max) {
 	return Math.floor(Math.random() * Math.floor(max));
 }
 
-function colorChanger() {
-	document.body.style.backgroundColor = colors[getRandomInt(colors.length)];
-	setTimeout(colorChanger, 10000);
-}
-
 function getData() {
 	document.querySelector("#bus").innerHTML = "";
 	getApiData("bus", "bus", busStops.join(",")).then((result) => {
@@ -70,10 +64,10 @@ function getData() {
 		for (let i=0;i<result["bustime-response"].prd.length;i++) {
 			let timeFromApi = result["bustime-response"].prd[i].prdtm;
 			let prdTime = new Date(timeFromApi.slice(0,4)+"/"+timeFromApi.slice(4,6)+"/"+timeFromApi.slice(6,16));
-			// let eta = Math.floor(Math.abs(prdTime - timeNow)/1000/60);
-			// document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir.slice(0,1) + "</span><span class=eta>" + eta + " min</span></li>";
-			let arrivalTime = addZero(((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours())) + ":" + addZero(prdTime.getMinutes());
-			document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir + "</span><span class=eta>" + arrivalTime + " </span></li>";
+			let eta = Math.floor(Math.abs(prdTime - timeNow)/1000/60);
+			document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir + "</span><span class=eta>" + eta + " min</span></li>";
+			// let arrivalTime = addZero(((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours())) + ":" + addZero(prdTime.getMinutes());
+			// document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir + "</span><span class=eta>" + arrivalTime + "</span></li>";
 		}
 	});
 	document.querySelector("#train").innerHTML = "";
@@ -82,10 +76,10 @@ function getData() {
 			let timeNow = new Date();
 			for(let j = 0;j<result.ctatt.eta.length;j++) {
 				let prdTime = new Date(result.ctatt.eta[j].arrT);
-				// let eta = Math.floor(Math.abs(prdTime - timeNow)/1000/60);
-				// document.querySelector("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + eta + " min<span></li>";
-				let arrivalTime = addZero(((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours())) + ":" + addZero(prdTime.getMinutes());
-				document.querySelector("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + arrivalTime + " <span></li>";
+				let eta = Math.floor(Math.abs(prdTime - timeNow)/1000/60);
+				document.querySelector("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + eta + " min<span></li>";
+				// let arrivalTime = addZero(((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours())) + ":" + addZero(prdTime.getMinutes());
+				// document.querySelector("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + arrivalTime + "</span></li>";
 			}
 		});
 	}
@@ -93,13 +87,28 @@ function getData() {
 		let temp = result.main.temp;
 		let tempF = Math.round(temp * 9 / 5 - 459.67);
 		let tempC = Math.round(temp - 273.15);
-		console.log(result)
-		document.querySelector('#weather-icon').className = "owf owf-" + result.weather[0].id + "-d"
+		let timeNow = new Date();
+		let dayNight = (timeNow.getHours() >= 22 || timeNow.getHours() <= 4) ? "n" : "d";
+		document.querySelector('#weather-icon').className = "owf owf-" + result.weather[0].id + "-" + dayNight;
 		document.querySelector("#weather-condition").innerHTML = result.weather[0].main;
 		document.querySelector("#weather-temperature").innerHTML = tempF + "&#176;F<br>" + tempC + "&#176;C";
+		// setTimeout(updateEta, 1000);
 	});
 	setTimeout(getData, 60000);
 }
 
-// colorChanger();
+function updateEta() {
+	console.log("updating eta");
+	let time = document.querySelectorAll("li>.eta");
+	let timeNow = new Date();
+	console.log(timeNow);
+	for (let i = 0; i < time.length; i++) {
+		let arrival = time[i].innerHTML;
+		let eta = parseInt( arrival.split(':')[0] + arrival.split(':')[1]) - parseInt(addZero(timeNow.getHours())+ "" +addZero(timeNow.getMinutes()));
+		time[i].innerHTML = eta + " min";
+		console.log(arrival, eta);
+	}
+	setTimeout(updateEta, 60000);
+}
+
 getData();

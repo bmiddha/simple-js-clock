@@ -5,9 +5,8 @@ A clock replacement for the office of ACM@UIC
 ## Features
 
 * Time and Date
-* Smooth changing background colors
 * CTA Bus and Train Arrival Times
-* Weather
+* Weather from OpenWeatherMap
 
 ## Dependencies
 
@@ -18,7 +17,7 @@ A clock replacement for the office of ACM@UIC
 
 1. Clone the repository
 2. Navigate to the repository directory
-3. Create a .env file 
+3. Create a `.env` file 
 ```
 CTA_TRAIN_API_KEY=<cta train api key>
 CTA_BUS_API_KEY=<cta bus api>

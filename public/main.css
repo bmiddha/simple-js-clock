@@ -27,7 +27,7 @@ body {
   display: grid;
   grid-template-areas: "a a a" "b b b" "c c c" "d d e";
   grid-template-columns: 1fr 1fr 0.5fr;
-  grid-template-rows: 0 3fr 1fr 5fr; }
+  grid-template-rows: 0 2fr 0.8fr 6fr; }
   .wrapper #message {
     margin-left: 50px;
     grid-area: d; }
@@ -36,7 +36,7 @@ body {
       .wrapper #message #bus li {
         display: none;
         background: #aa2222; }
-      .wrapper #message #bus li:nth-child(-n+6) {
+      .wrapper #message #bus li:nth-child(-n+10) {
         display: list-item; }
     .wrapper #message #train {
       clear: both; }
@@ -48,9 +48,10 @@ body {
     .wrapper #message #bus, .wrapper #message #train {
       clear: both;
       padding: 0;
-      font-size: 50px; }
+      font-size: 50px;
+      margin: 10px 0; }
       .wrapper #message #bus li, .wrapper #message #train li {
-        padding: 10px;
+        padding: 8px;
         list-style: none;
         border: 1px solid;
         min-width: 715px;
@@ -73,10 +74,10 @@ body {
     grid-area: c; }
   .wrapper #weather {
     grid-area: e;
-    font-size: 80px;
+    font-size: 75px;
     text-align: left;
     margin-right: 50px;
-    margin-top: 40px; }
+    margin-top: 130px; }
     .wrapper #weather p, .wrapper #weather i {
       text-align: right;
       margin: 0 10px;

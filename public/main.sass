@@ -21,7 +21,7 @@ body
     display: grid
     grid-template-areas: "a a a" "b b b" "c c c" "d d e"
     grid-template-columns: 1fr 1fr 0.5fr
-    grid-template-rows: 0 3fr 1fr 5fr
+    grid-template-rows: 0 2fr 0.8fr 6fr
 
     #message
         margin-left: 50px
@@ -31,7 +31,7 @@ body
             li
                 display: none
                 background: #aa2222
-            li:nth-child(-n+6)
+            li:nth-child(-n+10)
                 display: list-item
         #train
             clear: both
@@ -44,8 +44,9 @@ body
             clear: both
             padding: 0
             font-size: 50px
+            margin: 10px 0
             li
-                padding: 10px
+                padding: 8px
                 list-style: none
                 border: 1px solid
                 min-width: 715px
@@ -69,10 +70,10 @@ body
         grid-area: c
     #weather
         grid-area: e
-        font-size: 80px
+        font-size: 75px
         text-align: left
         margin-right: 50px
-        margin-top: 40px
+        margin-top: 130px
         p, i
             text-align: right
             margin: 0 10px

@@ -26,7 +26,6 @@ function getFromUrl(url) {
 function getCtaBus(busStop) {
 	return new Promise((resolve, reject) => {
 		let busUrl = "http://ctabustracker.com/bustime/api/v2/getpredictions?key=" + busApiKey + "&stpid=" + busStop + "&format=json";
-		// console.log(busUrl);
 		getFromUrl(busUrl).then((result) => {
 			let busJson = JSON.parse(result);
 			if (busJson.hasOwnProperty("error")) {

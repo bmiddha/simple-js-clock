@@ -105,7 +105,7 @@ function updateEta() {
 	console.log(timeNow);
 	for (let i = 0; i < time.length; i++) {
 		let arrival = time[i].innerHTML;
-		let eta = parseInt( arrival.split(':')[0] + arrival.split(':')[1]) - parseInt(addZero(timeNow.getHours())+ "" +addZero(timeNow.getMinutes()));
+		let eta = parseInt( arrival.split(":")[0] + arrival.split(":")[1]) - parseInt(addZero(timeNow.getHours())+ "" +addZero(timeNow.getMinutes()));
 		time[i].innerHTML = eta + " min";
 		console.log(arrival, eta);
 	}

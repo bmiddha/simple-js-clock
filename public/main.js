@@ -88,8 +88,9 @@ function getData() {
 		let tempF = Math.round(temp * 9 / 5 - 459.67);
 		let tempC = Math.round(temp - 273.15);
 		let timeNow = new Date();
-		let dayNight = (timeNow.getHours() >= 22 || timeNow.getHours() <= 4) ? "n" : "d";
-		document.querySelector('#weather-icon').className = "owf owf-" + result.weather[0].id + "-" + dayNight;
+		let dayNight = (timeNow.getHours() >= 19 || timeNow.getHours() <= 4) ? "n" : "d";
+		console.log(dayNight);
+		document.querySelector("#weather-icon").className = "owf owf-" + result.weather[0].id + "-" + dayNight;
 		document.querySelector("#weather-condition").innerHTML = result.weather[0].main;
 		document.querySelector("#weather-temperature").innerHTML = tempF + "&#176;F<br>" + tempC + "&#176;C";
 		// setTimeout(updateEta, 1000);

@@ -48,13 +48,13 @@ body {
     .wrapper #message #bus, .wrapper #message #train {
       clear: both;
       padding: 0;
-      font-size: 50px;
+      font-size: 47px;
       margin: 10px 0; }
       .wrapper #message #bus li, .wrapper #message #train li {
-        padding: 8px;
+        padding: 6px;
         list-style: none;
         border: 1px solid;
-        min-width: 715px;
+        min-width: 650px;
         float: left; }
         .wrapper #message #bus li i, .wrapper #message #bus li .route, .wrapper #message #bus li .direction, .wrapper #message #train li i, .wrapper #message #train li .route, .wrapper #message #train li .direction {
           margin-right: 5px;
@@ -74,13 +74,13 @@ body {
     grid-area: c; }
   .wrapper #weather {
     grid-area: e;
-    font-size: 75px;
+    font-size: 60px;
     text-align: left;
     margin-right: 50px;
-    margin-top: 20px; }
+    margin-top: 40px; }
     .wrapper #weather p, .wrapper #weather i {
       text-align: right;
-      margin: 0 10px;
+      margin: 0 10px 0 0;
       width: 100%; }
     .wrapper #weather i {
       font-size: 150px; }

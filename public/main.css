@@ -34,15 +34,14 @@ body {
     .wrapper #message #bus {
       clear: both; }
       .wrapper #message #bus li {
-        display: none;
-        background: #aa2222; }
+        display: none; }
       .wrapper #message #bus li:nth-child(-n+10) {
         display: list-item; }
     .wrapper #message #train {
       clear: both; }
       .wrapper #message #train li {
         display: none;
-        background: #2222aa; }
+        background: #222277; }
       .wrapper #message #train li:nth-child(-n+4) {
         display: list-item; }
     .wrapper #message #bus, .wrapper #message #train {

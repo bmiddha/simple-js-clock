@@ -59,7 +59,7 @@ function getRandomInt(max) {
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
+    zoom: 12.5,
     center: {lat: 41.8761, lng: -87.7596}
   });
 

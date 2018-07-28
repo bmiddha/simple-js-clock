@@ -28,7 +28,7 @@ body {
     grid-area: d; }
     .wrapper #message #map {
       z-index: 10;
-      height: 50%;
+      height: 60%;
       width: 100%;
       transition: opacity 0.5s;
       opacity: 1; }

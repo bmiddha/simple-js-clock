@@ -57,7 +57,38 @@ function getRandomInt(max) {
 	return Math.floor(Math.random() * Math.floor(max));
 }
 
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12.5,
+    center: {lat: 41.8761, lng: -87.7596}
+  });
+
+  var trafficLayer = new google.maps.TrafficLayer();
+  trafficLayer.setMap(map);
+}
+
+var curOpacity=1;
+function setOpacity(){
+	if(curOpacity==0){
+		curOpacity=1;
+		document.querySelector("#cta").style.display="none";
+		document.querySelector("#map").style.display="block";
+		document.querySelector("#cta").style.opacity=0;
+		document.querySelector("#map").style.opacity=curOpacity;
+	}else{
+		curOpacity=0;
+		document.querySelector("#cta").style.display="block";
+		document.querySelector("#map").style.display="none";
+		document.querySelector("#cta").style.opacity=1;
+		document.querySelector("#map").style.opacity=curOpacity;
+
+	}
+	
+}setInterval(setOpacity, 15000);
+
 function getData() {
+	let busEta=0;
+	let trainEta=0;
 	document.querySelector("#bus").innerHTML = "";
 	getApiData("bus", "bus", busStops.join(",")).then((result) => {
 		let timeNow = new Date();
@@ -65,6 +96,7 @@ function getData() {
 			let timeFromApi = result["bustime-response"].prd[i].prdtm;
 			let prdTime = new Date(timeFromApi.slice(0,4)+"/"+timeFromApi.slice(4,6)+"/"+timeFromApi.slice(6,16));
 			let eta = Math.floor(Math.abs(prdTime - timeNow)/1000/60);
+			busEta = eta;
 			document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir + "</span><span class=eta>" + eta + " min</span></li>";
 			// let arrivalTime = addZero(((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours())) + ":" + addZero(prdTime.getMinutes());
 			// document.querySelector("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir + "</span><span class=eta>" + arrivalTime + "</span></li>";
@@ -77,12 +109,16 @@ function getData() {
 			for(let j = 0;j<result.ctatt.eta.length;j++) {
 				let prdTime = new Date(result.ctatt.eta[j].arrT);
 				let eta = Math.floor(Math.abs(prdTime - timeNow)/1000/60);
+				trainEta = eta;
 				document.querySelector("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + eta + " min<span></li>";
 				// let arrivalTime = addZero(((prdTime.getHours() > 12 ) ? (prdTime.getHours() - 12) : prdTime.getHours())) + ":" + addZero(prdTime.getMinutes());
 				// document.querySelector("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + arrivalTime + "</span></li>";
 			}
 		});
 	}
+
+	setOpacity();
+
 	getApiData("weather", "city", city).then((result) => {
 		let temp = result.main.temp;
 		let tempF = Math.round(temp * 9 / 5 - 459.67);

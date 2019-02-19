@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import compression from "compression";
+import bodyParser from "body-parser";
+
 dotenv.config();
 
 import * as homeController from "./controllers/homeController";
@@ -18,15 +20,16 @@ app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
 app.use(cors());
 app.use(compression());
-app.use(
-    express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
-);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "./public"), { maxAge: 31557600000 }));
+
 
 
 app.get("/", homeController.index);
-app.get("/ctabus", ctaBusController.ctaBus);
-app.get("/ctatrain", ctaTrainController.ctaTrain);
-app.get("/metratrain", metraTrainController.metraTrain);
-app.get("/weather", openWeatherController.weather);
+app.get("/api/ctabus", ctaBusController.ctaBus);
+app.get("/api/ctatrain", ctaTrainController.ctaTrain);
+app.get("/api/metratrain", metraTrainController.metraTrain);
+app.get("/api/weather", openWeatherController.weather);
 
 export default app;

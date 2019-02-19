@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import getCtaBus from "../util/ctaBusApiKey";
+import getCtaBus from "../util/getCtaBus";
 
 export let ctaBus = (req: Request, res: Response): void => {
     getCtaBus(req.query.train).then((result) => {

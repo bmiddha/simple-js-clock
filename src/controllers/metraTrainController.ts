@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import getMetraTrain from "../util/metraTrainApiKey";
+import getMetraTrain from "../util/getMetraTrain";
 
 export let metraTrain = (req: Request, res: Response): void => {
     getMetraTrain(req.query.train).then((result) => {

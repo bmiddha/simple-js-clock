@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import getCtaTrain from "../util/ctaTrainApiKey";
+import getCtaTrain from "../util/getCtaTrain";
 
 export let ctaTrain = (req: Request, res: Response): void => {
     getCtaTrain(req.query.train).then((result) => {

@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "lib": [
+            "es6"
+        ],
+        "outDir": "./dist/",
+        "moduleResolution": "node"
+    },
+}

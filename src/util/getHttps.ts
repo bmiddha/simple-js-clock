@@ -1,8 +1,8 @@
 import https from "https";
 
-function getFromUrl(url: string): Promise<any> {
+function getFromUrl(options: {}): Promise<any> {
     return new Promise((resolve, reject) => {
-        https.request(url, (response) => {
+        https.request(options, (response) => {
             let str = "";
             response.on("data", (chunk) => {
                 str += chunk;

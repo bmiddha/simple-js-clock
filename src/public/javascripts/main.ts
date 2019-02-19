@@ -33,15 +33,15 @@ function getApiData(type: string, arg: string, value: string): Promise<{}> {
 function startTime() {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const today = new Date();
-    const hour = addZero(today.getHours());
+    const hour = today.getHours();
     const min = addZero(today.getMinutes());
     const sec = addZero(today.getSeconds());
     const date = addZero(today.getDate());
     const month = addZero(today.getMonth() + 1);
     const year = today.getFullYear();
     const day = days[today.getDay()];
-    const hourStr = (Number(hour) > 12) ? ((Number(hour) - 12).toString()) : hour;
-    document.getElementById("time").innerHTML = hourStr + ":" + min + ":" + sec;
+    const hourstr = addZero((hour > 12) ? (hour - 12) : hour);
+    document.getElementById("time").innerHTML = hourstr + ":" + min + ":" + sec;
     document.getElementById("date").innerHTML = day + "," + month + "/" + date + "/" + year;
     setTimeout(startTime, 500);
 }

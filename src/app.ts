@@ -1,12 +1,32 @@
-import { Request, Response, NextFunction } from 'express';
-import * as express from 'express';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import path from "path";
+import compression from "compression";
+dotenv.config();
 
-export const app = express();
+import * as homeController from "./controllers/homeController";
+import * as ctaBusController from "./controllers/ctaBusController";
+import * as ctaTrainController from "./controllers/ctaTrainController";
+import * as metraTrainController from "./controllers/metraTrainController";
+import * as openWeatherController from "./controllers/openWeatherController";
 
-app.use(express.static("public"));
+const app = express();
 
-app.use(function (req: Request, res: Response, next: NextFunction): void {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+app.set("port", process.env.PORT || 3000);
+app.set("views", path.join(__dirname, "../views"));
+app.set("view engine", "pug");
+app.use(cors());
+app.use(compression());
+app.use(
+    express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
+);
+
+
+app.get("/", homeController.index);
+app.get("/ctabus", ctaBusController.ctaBus);
+app.get("/ctatrain", ctaTrainController.ctaTrain);
+app.get("/metratrain", metraTrainController.metraTrain);
+app.get("/weather", openWeatherController.weather);
+
+export default app;

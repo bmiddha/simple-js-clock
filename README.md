@@ -18,29 +18,34 @@ A clock replacement for the office of ACM@UIC
 
 1. Clone the repository
 2. Navigate to the repository directory
-3. Create a `config.ts` file refer to `config.template.ts`
+3. Create a `.env` file refer to `.env.example`
 
-    ```ts
-    export const config = {
-        port: '3000',               // application port
-        ctaTrainApiKey: '',         // api key for CTA trains
-        ctaBusApiKey: '',           // api key for CTA buses
-        openWeatherMapKey: '',      // api key for Open Weather Map
-        colors: ["#303030", "#01579B", "#006064", "#304FFE", "#004D40"],            // background colors to cycle
-        busStops: ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"],   // bus stops to display
-        trainStations: ["40350"],   // train stations to display
-        city: "Chicago",            // city for weather
-    }
+    ```env
+    # application port
+    PORT=3000
+    # api key for CTA trains
+    CTA_TRAIN_API_KEY=
+    # api key for CTA buses
+    CTA_BUS_API_KEY=
+    # api key for metra trains
+    METRA_TRAIN_API_KEY=
+    # api key for Open Weather Map
+    OPEN_WEATHER_API_KEY=
+    # background colors to cycle
+    COLORS=303030 01579B 006064 304FFE 004D40
+    # bus stops to display
+    BUS_STOPS=6700 6627 307 332 4640 14487 6347 206
+    # train stations to display
+    TRAIN_STATIONS=40350
+    # city for weather
+    CITY=Chicago
+    # Temperature unites metric or imperial or both
+    UNITS=both
     ```
 
 4. Run `npm install` to install dependencies
 
-## Configuration
-
-Modify the constants located at the top of `site\main.js` to change background colors, bus stops, train stations and the weather location
-
-
 ## How to use
 
 1. Run `npm run start` to start the npm server.
-2. navigate the browser to `index.html` located in `site/index.html`
+2. navigate the browser to `locahost:3000` or the port specified in the config.

@@ -1,7 +1,7 @@
 import dotnev from "dotenv";
 dotnev.config();
 
-import getFromUrl from "./getFromUrl";
+import getHttps from "./getHttps";
 
 const metraTrainApiKey = process.env.METRA_TRAIN_API_KEY;
 function getMetraTrain(trainStation: string): Promise<{}> {

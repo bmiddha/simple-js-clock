@@ -1,4 +1,4 @@
-# Simple JS Clock
+# Simple JS (Now in Typescript) Clock
 
 A clock replacement for the office of ACM@UIC
 
@@ -11,28 +11,34 @@ A clock replacement for the office of ACM@UIC
 ## Dependencies
 
 * nodeJS
-* `dotenv` and `express` packages required
+* `express` package required
+* `typescript` package required to build the application
 
 ## Installation
 
 1. Clone the repository
 2. Navigate to the repository directory
-3. Create a `.env` file 
-```
-CTA_TRAIN_API_KEY=<cta train api key>
-CTA_BUS_API_KEY=<cta bus api>
-OPEN_WEATHER_MAP_API_KEY=<open weather map api key>
-```
+3. Create a `config.ts` file refer to `config.template.ts`
+
+    ```ts
+    export const config = {
+        port: '3000',               // application port
+        ctaTrainApiKey: '',         // api key for CTA trains
+        ctaBusApiKey: '',           // api key for CTA buses
+        openWeatherMapKey: '',      // api key for Open Weather Map
+        colors: ["#303030", "#01579B", "#006064", "#304FFE", "#004D40"],            // background colors to cycle
+        busStops: ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"],   // bus stops to display
+        trainStations: ["40350"],   // train stations to display
+        city: "Chicago",            // city for weather
+    }
+    ```
+
 4. Run `npm install` to install dependencies
 
 ## Configuration
+
 Modify the constants located at the top of `site\main.js` to change background colors, bus stops, train stations and the weather location
-```
-const colors = ["#303030", "#01579B", "#006064", "#304FFE", "#004D40"];
-const busStops = ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"];
-const trainStations = ["40350"];
-const city = "Chicago";
-```
+
 
 ## How to use
 

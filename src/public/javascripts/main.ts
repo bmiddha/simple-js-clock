@@ -6,24 +6,82 @@ const googleMapSettings = {
     center: { lat: 41.8761, lng: -87.7596 }
 };
 
-function getApiData(type: string, arg: string, value: string): Promise<{}> {
+interface ctaBusPrediction {
+    "tmstmp": Date;
+    "typ": string;
+    "stpnm": string;
+    "stpid": string;
+    "vid": string;
+    "dstp": number;
+    "rt": string;
+    "rtdd": string;
+    "rtdir": "Eastbound" | "Westbound" | "Northbound" | "Southbound";
+    "des": string;
+    "prdtm": Date;
+    "tablockid": string;
+    "tatripid": string;
+    "dly": boolean;
+    "prdctdn": string;
+    "zone": string;
+}
+
+interface ctaTrainPredictions {
+    "staId": string;
+    "stpId": string;
+    "staNm": string;
+    "stpDe": string;
+    "rn": string;
+    "rt": string;
+    "destSt": string;
+    "destNm": string;
+    "trDr": string;
+    "prdt": Date;
+    "arrT": Date;
+    "isApp": string;
+    "isSch": string;
+    "isDly": string;
+    "isFlt": string;
+    "flags": boolean;
+    "lat": string;
+    "lon": string;
+    "heading": string;
+}
+
+interface Weather {
+    "id": number;
+    "main": string;
+    "description": string;
+    "icon": string;
+}
+
+interface WeatherMain {
+    "temp": number;
+    "pressure": number;
+    "humidity": number;
+    "temp_min": number;
+    "temp_max": number;
+}
+
+interface WeatherForecast {
+    "weather": Array<Weather>;
+    "main": WeatherMain;
+}
+
+function getApiData(url: string): Promise<string> {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
-        const url = "http://localhost:8080/api/" + type + "?" + arg + "=" + value;
         xhr.open("GET", url, true);
         xhr.send();
         xhr.onreadystatechange = () => {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                let data;
                 if (xhr.responseText) {
                     try {
-                        data = JSON.parse(xhr.responseText);
+                        resolve(xhr.responseText);
                     }
                     catch (e) {
                         reject(e);
                     }
                 }
-                resolve(data);
             }
             else reject(xhr.status);
         };
@@ -81,22 +139,25 @@ function setOpacity() {
 
 function getData() {
     document.querySelector<HTMLInputElement>("#bus").innerHTML = "";
-    getApiData("ctaBus", "bus", busStops.join(",")).then((result) => {
+    getApiData(`http://localhost:8080/api/bus?bus=${busStops.join(",")}`).then((resultString) => {
+        const result = JSON.parse(resultString);
         const timeNow = new Date();
         for (let i = 0; i < result["bustime-response"].prd.length; i++) {
             const timeFromApi = result["bustime-response"].prd[i].prdtm;
             const prdTime = new Date(timeFromApi.slice(0, 4) + "/" + timeFromApi.slice(4, 6) + "/" + timeFromApi.slice(6, 16));
-            const eta = Math.floor(Math.abs(prdTime - timeNow) / 1000 / 60);
+            const eta = Math.floor(Math.abs(prdTime.valueOf() - timeNow.valueOf()) / 1000 / 60);
             document.querySelector<HTMLInputElement>("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir + "</span><span class=eta>" + eta + " min</span></li>";
         }
     });
+
     document.querySelector<HTMLInputElement>("#train").innerHTML = "";
     for (let i = 0; i < trainStations.length; i++) {
-        getApiData("ctaTrain", "train", trainStations[i]).then((result) => {
+        getApiData(`http://localhost:8080/api/ctaTrain?train=${trainStations[i]}`).then((resultString) => {
+            const result = JSON.parse(resultString);
             const timeNow = new Date();
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);
-                const eta = Math.floor(Math.abs(prdTime - timeNow) / 1000 / 60);
+                const eta = Math.floor(Math.abs(prdTime.valueOf() - timeNow.valueOf()) / 1000 / 60);
                 document.querySelector<HTMLInputElement>("#train").innerHTML += "<li><i class='fa fa-train'></i><span class=route>" + result.ctatt.eta[j].rt + "</span><span class=direction>" + result.ctatt.eta[j].destNm + "</span><span class=eta>" + eta + " min<span></li>";
             }
         });
@@ -104,7 +165,8 @@ function getData() {
 
     setOpacity();
 
-    getApiData("weather", "city", city).then((result) => {
+    getApiData(`http://localhost:8080/api/weather?city=${city}`).then((resultString) => {
+        const result = JSON.parse(resultString);
         const temp = result.main.temp;
         const tempF = Math.round(temp * 9 / 5 - 459.67);
         const tempC = Math.round(temp - 273.15);
@@ -116,15 +178,12 @@ function getData() {
 }
 
 function updateEta() {
-    console.log("updating eta");
     const time = document.querySelectorAll<HTMLInputElement>("li>.eta");
     const timeNow = new Date();
-    console.log(timeNow);
     for (let i = 0; i < time.length; i++) {
         const arrival = time[i].innerHTML;
         const eta = parseInt(arrival.split(":")[0] + arrival.split(":")[1]) - parseInt(addZero(timeNow.getHours()) + "" + addZero(timeNow.getMinutes()));
         time[i].innerHTML = eta + " min";
-        console.log(arrival, eta);
     }
     setTimeout(updateEta, 60000);
 }

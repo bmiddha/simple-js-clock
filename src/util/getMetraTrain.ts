@@ -1,5 +1,5 @@
-import dotnev from "dotenv";
-dotnev.config();
+import dotenv from "dotenv";
+dotenv.config();
 
 import getHttps from "./getHttps";
 

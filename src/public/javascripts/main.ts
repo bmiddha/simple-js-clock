@@ -91,6 +91,9 @@ function getApiData(url: string): Promise<string> {
     });
 }
 
+const timeElement = document.getElementById("time")
+const dateElement = document.getElementById("date")
+
 function startTime() {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const today = new Date();
@@ -102,8 +105,12 @@ function startTime() {
     const year = today.getFullYear();
     const day = days[today.getDay()];
     const hourstr = addZero((hour > 12) ? (hour - 12) : hour);
-    document.getElementById("time").innerHTML = hourstr + ":" + min + ":" + sec;
-    document.getElementById("date").innerHTML = day + "," + month + "/" + date + "/" + year;
+    
+    // set time
+    timeElement.innerHTML = `${hourstr}:${min}:${sec}`;
+    
+    // set date
+    dateElement.innerHTML = `${day}, ${month}/${date}/${year}`;
     setTimeout(startTime, 500);
 }
 

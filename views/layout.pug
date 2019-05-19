@@ -4,11 +4,11 @@ html(lang='en')
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
-    link(rel='stylesheet', href='/stylesheets/main.css')
+    //- link(rel='stylesheet', href='/stylesheets/main.css')
     link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.13/css/all.css', integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp', crossorigin='anonymous')
     link(rel='stylesheet', href='/owi/css/open-weather-icons.css')
     title #{title} | Not So Simple JS Clock
-  body(onload='startTime()', class='#body')
+  body(class='#body')
     include partials/header
 
     .wrapper
@@ -16,5 +16,16 @@ html(lang='en')
 
     include partials/footer
 
-    script(src='/javascripts/main.js')
-    script(async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAtnVHaDheYBfJakwrZpUJnvUoW8_lfM9g&callback=initMap')
+    script(async src='/main.js')
+    script.
+      function initMap() {
+        const map = new google.maps.Map(document.querySelector("#map"), {
+          zoom: 12.5,
+          center: {
+            lat: 41.8761,
+            lng: -87.7596
+          }});
+        const trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(map);
+      }
+    script(async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDE2PmXO4QCLft7RdeEOFd3o_L988oV5IQ&callback=initMap')

@@ -1,13 +1,9 @@
+import "./main.scss";
+import "../public/images/asfalt-light.png";
+
 const busStops = ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"];
 const trainStations = ["40350"];
 const city = "Chicago";
-const googleMapSettings = {
-    zoom: 12.5,
-    center: {
-        lat: 41.8761,
-        lng: -87.7596
-    }
-};
 
 interface ctaBusPrediction {
     "tmstmp": Date;
@@ -70,27 +66,6 @@ interface WeatherForecast {
     "main": WeatherMain;
 }
 
-function getApiData(url: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", url, true);
-        xhr.send();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                if (xhr.responseText) {
-                    try {
-                        resolve(xhr.responseText);
-                    }
-                    catch (e) {
-                        reject(e);
-                    }
-                }
-            }
-            else reject(xhr.status);
-        };
-    });
-}
-
 const timeElement = document.getElementById("time")
 const dateElement = document.getElementById("date")
 
@@ -123,12 +98,6 @@ function getRandomInt(max: number): number {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-function initMap() {
-    const map = new google.maps.Map(document.querySelector<HTMLDivElement>("#map"), googleMapSettings);
-    const trafficLayer = new google.maps.TrafficLayer();
-    trafficLayer.setMap(map);
-}
-
 let curOpacity = 1;
 function setOpacity() {
     if (curOpacity == 0) {
@@ -149,8 +118,7 @@ function setOpacity() {
 
 function getData() {
     document.querySelector<HTMLDivElement>("#bus").innerHTML = "";
-    getApiData(`http://localhost:8080/api/bus?bus=${busStops.join(",")}`).then((resultString) => {
-        const result = JSON.parse(resultString);
+    fetch(`http://localhost:8080/api/ctaBus?bus=${busStops.join(",")}`).then(res => res.json()).then((result) => {
         const timeNow = new Date();
         for (let i = 0; i < result["bustime-response"].prd.length; i++) {
             const timeFromApi = result["bustime-response"].prd[i].prdtm;
@@ -159,11 +127,10 @@ function getData() {
             document.querySelector<HTMLDivElement>("#bus").innerHTML += "<li><i class='fa fa-bus'></i><span class=route>" + result["bustime-response"].prd[i].rt + "</span><span class=direction>" + result["bustime-response"].prd[i].rtdir + "</span><span class=eta>" + eta + " min</span></li>";
         }
     });
-
+    
     document.querySelector<HTMLDivElement>("#train").innerHTML = "";
     for (let i = 0; i < trainStations.length; i++) {
-        getApiData(`http://localhost:8080/api/ctaTrain?train=${trainStations[i]}`).then((resultString) => {
-            const result = JSON.parse(resultString);
+        fetch(`http://localhost:8080/api/ctaTrain?train=${trainStations[i]}`).then(res => res.json()).then((result) => {
             const timeNow = new Date();
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);
@@ -175,8 +142,7 @@ function getData() {
 
     setOpacity();
 
-    getApiData(`http://localhost:8080/api/weather?city=${city}`).then((resultString) => {
-        const result = JSON.parse(resultString);
+    fetch(`http://localhost:8080/api/weather?city=${city}`).then(res => res.json()).then((result) => {
         const temp = result.main.temp;
         const tempF = Math.round(temp * 9 / 5 - 459.67);
         const tempC = Math.round(temp - 273.15);
@@ -198,4 +164,6 @@ function updateEta() {
     setTimeout(updateEta, 60000);
 }
 
+
+startTime();
 getData();

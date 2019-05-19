@@ -4,12 +4,15 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run copyStaticAssets && npm run compile && node dist/server.js",
-    "build": "npm run compile",
-    "compile": "./node_modules/.bin/tsc",
-    "copyStaticAssets": "./node_modules/.bin/ts-node copyStaticAssets.ts",
-    "clean": "rm -r dist"
+    "clean": "rm -rf ./dist/",
+    "build": "npm run build-ts && npm run build-webpack",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "build-webpack": "webpack-cli -p",
+    "watch-webpack": "webpack-cli -w -p",
+    "watch-node": "nodemon ./dist/server.js",
+    "start": "npm run clean && npm run build && node ./dist/server.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"Webpack,TypeScript,Node\" -c \"magenta.bold,cyan.bold,green.bold\" \"npm run watch-webpack\" \"npm run watch-ts\" \"npm run watch-node\""
   },
   "repository": {
     "type": "git",
@@ -27,7 +30,6 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.3",
-    "node-sass-middleware": "^0.11.0",
     "open-weather-icons": "0.0.8",
     "path": "^0.12.7",
     "pug": "^2.0.3",
@@ -41,11 +43,19 @@
     "@types/express": "^4.16.1",
     "@types/googlemaps": "^3.30.16",
     "@types/node": "^11.9.4",
-    "@types/node-sass-middleware": "0.0.30",
     "@types/shelljs": "^0.8.3",
-    "node-sass": "^4.11.0",
+    "@types/webpack": "^4.4.31",
+    "concurrently": "^4.1.0",
+    "css-loader": "^2.1.1",
+    "file-loader": "^3.0.1",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^6.0.0",
     "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
+    "typescript": "^3.3.3",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2"
   }
 }

@@ -10,7 +10,6 @@ dotenv.config();
 import * as homeController from "./controllers/homeController";
 import * as ctaBusController from "./controllers/ctaBusController";
 import * as ctaTrainController from "./controllers/ctaTrainController";
-import * as metraTrainController from "./controllers/metraTrainController";
 import * as openWeatherController from "./controllers/openWeatherController";
 
 const app = express();
@@ -28,7 +27,6 @@ app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }))
 app.get("/", homeController.index);
 app.get("/api/ctaBus", ctaBusController.ctaBus);
 app.get("/api/ctaTrain", ctaTrainController.ctaTrain);
-app.get("/api/metraTrain", metraTrainController.metraTrain);
 app.get("/api/weather", openWeatherController.weather);
 
 export default app;

@@ -1,18 +1,12 @@
 import dotenv from "dotenv";
+import fetch from "node-fetch";
 dotenv.config();
 
-import getHttps from "./getHttps";
-
 function getCtaTrain(trainStation: string): Promise<{}> {
-    return new Promise((resolve, reject) => {
-        const trainUrl = "https://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=" + process.env.CTA_TRAIN_API_KEY + "&mapid=" + trainStation + "&max=5&outputType=JSON";
-        getHttps(trainUrl).then((result) => {
-            const trainJson = JSON.parse(result);
-            if (trainJson.hasOwnProperty("error")) {
-                reject("Error response on train station " + trainStation);
-            }
-            resolve(trainJson);
-        }).catch(err => reject(err));
+    return new Promise((resolve, reject): void => {
+        const url = "https://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=" + process.env.CTA_TRAIN_API_KEY + "&mapid=" + trainStation + "&max=5&outputType=JSON";
+        fetch(url).then((res): {} => res.json()).then((result: {}): void => resolve(result))
+            .catch((err): void => reject(err));
     });
 }
 

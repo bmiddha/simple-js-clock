@@ -5,8 +5,8 @@ const busStops = ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"];
 const trainStations = ["40350"];
 const city = "Chicago";
 
-interface ctaBusPrediction {
-    "tmstmp": Date;
+interface CtaBusPrediction {
+    "tmstmp": string;
     "typ": string;
     "stpnm": string;
     "stpid": string;
@@ -16,7 +16,7 @@ interface ctaBusPrediction {
     "rtdd": string;
     "rtdir": "Eastbound" | "Westbound" | "Northbound" | "Southbound";
     "des": string;
-    "prdtm": Date;
+    "prdtm": string;
     "tablockid": string;
     "tatripid": string;
     "dly": boolean;
@@ -24,7 +24,19 @@ interface ctaBusPrediction {
     "zone": string;
 }
 
-interface ctaTrainPredictions {
+interface CtaBusError {
+    "stpid": string;
+    "msg": string;
+}
+
+interface CtaBusPredictions {
+    "bustime-response": {
+        "prd": CtaBusPrediction[];
+        "error"?: CtaBusError[];
+    };
+}
+
+interface CtaTrainPrediction {
     "staId": string;
     "stpId": string;
     "staNm": string;
@@ -46,6 +58,15 @@ interface ctaTrainPredictions {
     "heading": string;
 }
 
+interface CtaTrainPredictions {
+    "ctatt": {
+        "tmst": string;
+        "errCd": string;
+        "errNm": number;
+        "eta": CtaTrainPrediction[];
+    };
+}
+
 interface Weather {
     "id": number;
     "main": string;
@@ -62,14 +83,19 @@ interface WeatherMain {
 }
 
 interface WeatherForecast {
-    "weather": Array<Weather>;
+    "weather": Weather[];
     "main": WeatherMain;
 }
 
 const timeElement = document.getElementById("time")
 const dateElement = document.getElementById("date")
 
-function startTime() {
+function addZero(i: number): string {
+    if (i < 10) return "0" + i;
+    return i.toString();
+}
+
+function startTime(): void {
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const today = new Date();
     const hour = today.getHours();
@@ -89,17 +115,8 @@ function startTime() {
     setTimeout(startTime, 500);
 }
 
-function addZero(i: number): string {
-    if (i < 10) return "0" + i;
-    return i.toString();
-}
-
-function getRandomInt(max: number): number {
-    return Math.floor(Math.random() * Math.floor(max));
-}
-
 let curOpacity = 1;
-function setOpacity() {
+function setOpacity(): void {
     if (curOpacity == 0) {
         curOpacity = 1;
         document.querySelector<HTMLDivElement>("#cta").style.display = "none";
@@ -116,9 +133,9 @@ function setOpacity() {
 
 } setInterval(setOpacity, 15000);
 
-function getData() {
+function getData(): void {
     document.querySelector<HTMLDivElement>("#bus").innerHTML = "";
-    fetch(`http://localhost:8080/api/ctaBus?bus=${busStops.join(",")}`).then(res => res.json()).then((result) => {
+    fetch(`http://localhost:8080/api/ctaBus?bus=${busStops.join(",")}`).then((res): Promise<CtaBusPredictions> => res.json()).then((result): void => {
         const timeNow = new Date();
         for (let i = 0; i < result["bustime-response"].prd.length; i++) {
             const timeFromApi = result["bustime-response"].prd[i].prdtm;
@@ -130,7 +147,7 @@ function getData() {
     
     document.querySelector<HTMLDivElement>("#train").innerHTML = "";
     for (let i = 0; i < trainStations.length; i++) {
-        fetch(`http://localhost:8080/api/ctaTrain?train=${trainStations[i]}`).then(res => res.json()).then((result) => {
+        fetch(`http://localhost:8080/api/ctaTrain?train=${trainStations[i]}`).then((res): Promise<CtaTrainPredictions> => res.json()).then((result): void => {
             const timeNow = new Date();
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);
@@ -142,7 +159,7 @@ function getData() {
 
     setOpacity();
 
-    fetch(`http://localhost:8080/api/weather?city=${city}`).then(res => res.json()).then((result) => {
+    fetch(`http://localhost:8080/api/weather?city=${city}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
         const temp = result.main.temp;
         const tempF = Math.round(temp * 9 / 5 - 459.67);
         const tempC = Math.round(temp - 273.15);
@@ -153,7 +170,7 @@ function getData() {
     setTimeout(getData, 60000);
 }
 
-function updateEta() {
+function updateEta(): void {
     const time = document.querySelectorAll<HTMLDivElement>("li>.eta");
     const timeNow = new Date();
     for (let i = 0; i < time.length; i++) {

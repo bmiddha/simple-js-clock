@@ -6,7 +6,6 @@ import compression from "compression";
 import bodyParser from "body-parser";
 
 dotenv.config();
-
 import * as homeController from "./controllers/homeController";
 import * as ctaBusController from "./controllers/ctaBusController";
 import * as ctaTrainController from "./controllers/ctaTrainController";

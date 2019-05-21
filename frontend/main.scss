@@ -9,9 +9,9 @@ body {
     margin: 0;
     // background-color: #000000;
     // background-image: url("/asfalt-light.png");
-    background-attachment: fixed;
-    background-repeat: repeat;
-    background-size: 600px;
+    // background-attachment: fixed;
+    // background-repeat: repeat;
+    // background-size: 600px;
     font-family: Montserrat, sans-serif;
     // color: #ffffff;
     font-size: 3em;
@@ -84,7 +84,7 @@ body { -ms-overflow-style: none; }
     display: grid;
     grid-template-areas: "time time time weather" "date date date weather" "messages messages messages messages" "events events events events" "transit transit transit transit" "footer footer footer footer";
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 0.6fr 0.25fr 1fr 2.2fr 1.5fr 0.25fr;
+    grid-template-rows: 0.85fr 0.30fr 0.9fr 2.3fr 1.8fr 0.18fr;
     #time {
         grid-area: time;
     }
@@ -109,7 +109,7 @@ body { -ms-overflow-style: none; }
 }
 
 .wrapper {
-    padding: 0.75em;
+    padding: 0.5em;
 }
 
 #time {
@@ -146,38 +146,69 @@ body { -ms-overflow-style: none; }
 }
 
 #cta {
+    font-size: 0.8em;
     ul {
         list-style: none;
+        clear: both;
+        li {
+            padding: 10px 0;
+            width: 50%;
+            float: left;
+        }
     }
     .icon, .route, .direction, .eta {
         display: inline-block;
-    }
-    .icon {
-        width: 1.5em;
-    }
-    .route {
-        width: 3em;
+        margin-right: 10px;
+        line-height: 80px;
     }
     .direction {
-        width: 10em;
+        position: relative;
+        left: -50px;
+        width: 265px;
+        display: inline;
+        overflow: hidden;
     }
     .eta {
-        width: 5em;
+        width: 140px;
+        height: 80px;
+        border: 3px solid #ffffff;
+        border-left: none;
+        padding-left: 20px;
+        padding-right: 5px;
+        position: relative;
+        left: -50px;
+        text-align: right;
+    }
+    .icon {
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+        text-align: center;
+        font-weight: bold;
     }
     #bus {
+        .icon {
+            border: 3px solid #ffffff;
+        }
         li {
             display: none;
         }
-        li:nth-child(-n+4) {
+        li:nth-child(-n+6) {
             display: list-item;
         }
     }
     #train {
-        margin-top: 25px;
+        .icon {
+            background-color: #3333ff;
+        }
+        .eta {
+            border-color: #3333ff;
+            color: #3333ff;
+        }
         li {
             display: none;
         }
-        li:nth-child(-n+2) {
+        li:nth-child(-n+4) {
             display: list-item;
         }
     }
@@ -188,25 +219,31 @@ body { -ms-overflow-style: none; }
         font-size: 0.75em;
         list-style: none;
         clear: both;
-        li {
+        li.event {
+            padding: 15px;
             float: left;
-            margin: 10px 0;
             width: 50%;
             span {
                 margin: 5px 0;
             }
             .eventName {
                 font-size: 1.15em;
-                text-decoration: underline;
-                margin-bottom: 10px;
+                // text-decoration: underline;
+                margin-bottom: 5px;
             }
             .icon {
                 width: 1.25em;
+            }
+        }
+        li.event.happeningNow {
+            .eventName {
+                text-decoration: underline;
             }
         }
     }
 }
 
 #footer {
-    font-size: 0.6em;
+    text-align: center;
+    font-size: 0.5em;
 }

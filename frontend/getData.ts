@@ -90,7 +90,7 @@ export default function getData(): void {
             const timeFromApi = result["bustime-response"].prd[i].prdtm;
             const prdTime = new Date(timeFromApi.slice(0, 4) + "/" + timeFromApi.slice(4, 6) + "/" + timeFromApi.slice(6, 16));
             const eta = Math.floor(Math.abs(prdTime.valueOf() - timeNow.valueOf()) / 1000 / 60);
-            document.getElementById("bus").innerHTML += "<li class='busItem'><i class='fa fa-bus icon'></i><span class='route'>" + result["bustime-response"].prd[i].rt + "</span><span class='direction'>" + result["bustime-response"].prd[i].rtdir + "</span><span class='eta'>" + eta + " min</span></li>";
+            document.getElementById("bus").innerHTML += "<li class='busItem'><span class='route icon'>" + result["bustime-response"].prd[i].rt + "</span><span class='eta'>" + eta + "m</span><span class='direction'>" + result["bustime-response"].prd[i].rtdir + "</span></li>";
         }
     });
     
@@ -101,7 +101,7 @@ export default function getData(): void {
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);
                 const eta = Math.floor(Math.abs(prdTime.valueOf() - timeNow.valueOf()) / 1000 / 60);
-                document.getElementById("train").innerHTML += "<li class='trainItem'><i class='fa fa-train icon'></i><span class='route'>" + result.ctatt.eta[j].rt + "</span><span class='direction'>" + result.ctatt.eta[j].destNm + "</span><span class='eta'>" + eta + " min<span></li>";
+                document.getElementById("train").innerHTML += "<li class='trainItem'><i class='fa fa-train icon'></i><span class='eta'>" + eta + "m</span><span class='direction'>" + result.ctatt.eta[j].destNm + "</span></li>";
             }
         });
     }

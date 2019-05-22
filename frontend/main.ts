@@ -26,7 +26,7 @@ function switcher(): void {
     if (counter == switcherElements.length) counter = 0;
     let previous = (counter == 0) ? switcherElements.length - 1 : counter - 1;
     switcherElements[previous].style.left = "-1500px";
-    switcherElements[counter].style.left = "25px";
+    switcherElements[counter].style.left = "0px";
     counter++;
 }
 
@@ -34,7 +34,6 @@ window.onload = (): void => {
     updateTime();
     getData();
     switcher();
-    document.querySelector<HTMLDivElement>("#transit").style.left = "25px";
     setInterval(updateTime, 5000);
     setInterval(getData, 60000);
     setInterval(switcher, 5000);

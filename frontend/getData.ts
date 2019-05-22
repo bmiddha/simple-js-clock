@@ -2,6 +2,21 @@ const busStops = ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"];
 const trainStations = ["40350"];
 const city = "Chicago";
 
+interface StringIndexes {
+    [key: string]: string;
+}
+
+const ctaRouteColors: StringIndexes = {
+    Red: "#c10000",
+    Blue: "#03396c",
+    Brown: "#560d0d",
+    Green: "#004a2f",
+    Orange: "#ff6337",
+    Pink: "#ff3e6d",
+    Purple: "#866ec7",
+    Yellow: "#e4c666",
+}
+
 interface CtaBusPrediction {
     "tmstmp": string;
     "typ": string;
@@ -90,7 +105,7 @@ export default function getData(): void {
             const timeFromApi = result["bustime-response"].prd[i].prdtm;
             const prdTime = new Date(timeFromApi.slice(0, 4) + "/" + timeFromApi.slice(4, 6) + "/" + timeFromApi.slice(6, 16));
             const eta = Math.floor(Math.abs(prdTime.valueOf() - timeNow.valueOf()) / 1000 / 60);
-            document.getElementById("bus").innerHTML += "<li class='busItem'><span class='route icon'>" + result["bustime-response"].prd[i].rt + "</span><span class='eta'>" + eta + "m</span><span class='direction'>" + result["bustime-response"].prd[i].rtdir + "</span></li>";
+            document.getElementById("bus").innerHTML += `<li class='busItem'><span class='route icon'>${result["bustime-response"].prd[i].rt}</span><span class='eta'>${eta}m</span><span class='direction'>${result["bustime-response"].prd[i].rtdir}"</span></li>`;
         }
     });
     
@@ -101,7 +116,8 @@ export default function getData(): void {
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);
                 const eta = Math.floor(Math.abs(prdTime.valueOf() - timeNow.valueOf()) / 1000 / 60);
-                document.getElementById("train").innerHTML += "<li class='trainItem'><i class='fa fa-train icon'></i><span class='eta'>" + eta + "m</span><span class='direction'>" + result.ctatt.eta[j].destNm + "</span></li>";
+                const routeColor = ctaRouteColors[result.ctatt.eta[j].rt];
+                document.getElementById("train").innerHTML += `<li class='trainItem'><i class='fa fa-train icon' style=background-color:${routeColor};></i><span class='eta' style=color:${routeColor};border-color:${routeColor};>${eta}m</span><span class='direction'>${result.ctatt.eta[j].destNm}</span></li>`;
             }
         });
     }

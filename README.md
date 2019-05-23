@@ -19,3 +19,49 @@ A clock replacement for the office of ACM@UIC
 
 1. Run `npm run start` to start the npm server or `npm run watch` to watch for changes.
 2. Navigate the browser to `locahost:8080` or the port specified in the config.
+
+# Deployment on a Raspberry PI
+
+## Step 0: Install Packages
+```
+sudo apt update && sudo apt upgrade -y
+sudo apt install --no-install-recommends -y chromium-browser xserver-xorg x11-xserver-utils xinit
+```
+
+## Step 1: Enable auto-login
+Use the `raspi-config` tool to enable auto-login to the console.
+`sudo raspi-config` => Boot Options => Desktop / CLI => Console Autologin
+
+## Step 2: Set console orientation
+Edit the file `/boot/config.txt`
+Add the following option:
+```
+display_rotate=3
+```
+
+```
+display_rotate=0 Normal
+display_rotate=1 90 degrees
+display_rotate=2 180 degrees
+display_rotate=3 270 degrees
+```
+
+## Step 4: `.xinitrc` file
+
+`/home/pi/.xinitrc`
+```
+#!/bin/sh
+xset -dpms
+xset s off
+xset s noblank
+
+xrandr --output default --rotate left
+
+setxkbmap -option "terminate:ctrl_alt_bksp"
+
+unclutter &
+chromium-browser http://server:8080 --window-size=1080,1920 --start-fullscreen --kiosk --incognito --noerrdialogs --disable-translate --no-first-run --fast --fast-start --disable-infobars --disable-features=TranslateUI --disk-cache-dir=/dev/null
+```
+Replace `http://server:8080` with nodejs server.
+
+## Reboot

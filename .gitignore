@@ -1,6 +1,7 @@
 dist/
 config.ts
 token.json
+credentials.json
 # Created by https://www.gitignore.io/api/node,linux,windows,prepros
 
 ### Linux ###

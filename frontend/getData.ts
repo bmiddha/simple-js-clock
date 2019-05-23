@@ -2,6 +2,8 @@ const busStops = ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"];
 const trainStations = ["40350"];
 const city = "Chicago";
 
+const serverAddress = window.location.host;
+
 interface StringIndexes {
     [key: string]: string;
 }
@@ -99,7 +101,7 @@ interface WeatherForecast {
 
 export default function getData(): void {
     document.getElementById("bus").innerHTML = "";
-    fetch(`http://localhost:8080/api/ctaBus?bus=${busStops.join(",")}`).then((res): Promise<CtaBusPredictions> => res.json()).then((result): void => {
+    fetch(`http://${serverAddress}/api/ctaBus?bus=${busStops.join(",")}`).then((res): Promise<CtaBusPredictions> => res.json()).then((result): void => {
         const timeNow = new Date();
         for (let i = 0; i < result["bustime-response"].prd.length; i++) {
             const timeFromApi = result["bustime-response"].prd[i].prdtm;
@@ -111,7 +113,7 @@ export default function getData(): void {
     
     document.getElementById("train").innerHTML = "";
     for (let i = 0; i < trainStations.length; i++) {
-        fetch(`http://localhost:8080/api/ctaTrain?train=${trainStations[i]}`).then((res): Promise<CtaTrainPredictions> => res.json()).then((result): void => {
+        fetch(`http://${serverAddress}/api/ctaTrain?train=${trainStations[i]}`).then((res): Promise<CtaTrainPredictions> => res.json()).then((result): void => {
             const timeNow = new Date();
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);
@@ -121,7 +123,7 @@ export default function getData(): void {
             }
         });
     }
-    fetch(`http://localhost:8080/api/weather?city=${city}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
+    fetch(`http://${serverAddress}/api/weather?city=${city}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
         const temp = result.main.temp;
         const tempF = Math.round(temp * 9 / 5 - 459.67);
         const tempC = Math.round(temp - 273.15);

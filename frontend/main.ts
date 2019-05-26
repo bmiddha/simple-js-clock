@@ -1,7 +1,6 @@
 import getData from "./getData";
 
 import "./main.scss";
-import "../public/images/asfalt-light.png";
 
 
 const timeElement = document.getElementById("time");

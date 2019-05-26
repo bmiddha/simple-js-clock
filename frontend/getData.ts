@@ -127,8 +127,6 @@ export default function getData(): void {
         const temp = result.main.temp;
         const tempF = Math.round(temp * 9 / 5 - 459.67);
         const tempC = Math.round(temp - 273.15);
-        document.getElementById("weather-icon").className = "owi owi-" + result.weather[0].icon;
-        document.getElementById("weather-condition").innerHTML = result.weather[0].main;
-        document.getElementById("weather-temperature").innerHTML = `${tempF} &#176;F<br>${tempC} &#176;C`;
+        document.getElementById("weather").innerHTML = `<i class='owi owi-${result.weather[0].icon}</i><p>${result.weather[0].main}</p><p>${tempF} &#176;F<br>${tempC} &#176;C</p>'>`
     });
 }

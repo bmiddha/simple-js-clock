@@ -31,9 +31,14 @@ function switcher(): void {
 
 window.onload = (): void => {
     updateTime();
-    getData();
     switcher();
     setInterval(updateTime, 5000);
-    setInterval(getData, 60000);
     setInterval(switcher, 5000);
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("offline") === "true") {
+        document.getElementById("offlineMode").style.display = "block";
+    } else {
+        getData();
+        setInterval(getData, 60000);
+    }
 }

@@ -1,14 +1,9 @@
-const busStops = ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"];
-const trainStations = ["40350"];
-const city = "Chicago";
-
-const serverAddress = window.location.host;
-
 interface StringIndexes {
     [key: string]: string;
 }
 
 const ctaRouteColors: StringIndexes = {
+    // TODO: Pick Better Colors
     Red: "#c10000",
     Blue: "#03396c",
     Brown: "#560d0d",
@@ -28,7 +23,7 @@ interface CtaBusPrediction {
     "dstp": number;
     "rt": string;
     "rtdd": string;
-    "rtdir": "Eastbound" | "Westbound" | "Northbound" | "Southbound";
+    "rtdir": string;
     "des": string;
     "prdtm": string;
     "tablockid": string;
@@ -45,7 +40,7 @@ interface CtaBusError {
 
 interface CtaBusPredictions {
     "bustime-response": {
-        "prd": CtaBusPrediction[];
+        "prd"?: CtaBusPrediction[];
         "error"?: CtaBusError[];
     };
 }
@@ -99,21 +94,33 @@ interface WeatherForecast {
     };
 }
 
-export default function getData(): void {
+export interface Config {
+    "ctaBusStops"?: string[];
+    "ctaTrainStations"?: string[];
+    "weatherCity"?: string;
+    "eventCalendars"?: string[];
+}
+
+export function getData(config: Config): void {
+    const serverAddress = window.location.host;
     document.getElementById("bus").innerHTML = "";
-    fetch(`http://${serverAddress}/api/ctaBus?bus=${busStops.join(",")}`).then((res): Promise<CtaBusPredictions> => res.json()).then((result): void => {
+    fetch(`http://${serverAddress}/api/ctaBus?bus=${config.ctaBusStops.join(",")}`).then((res): Promise<CtaBusPredictions> => res.json()).then((result): void => {
         const timeNow = new Date();
-        for (let i = 0; i < result["bustime-response"].prd.length; i++) {
-            const timeFromApi = result["bustime-response"].prd[i].prdtm;
-            const prdTime = new Date(timeFromApi.slice(0, 4) + "/" + timeFromApi.slice(4, 6) + "/" + timeFromApi.slice(6, 16));
-            const eta = Math.floor(Math.abs(prdTime.valueOf() - timeNow.valueOf()) / 1000 / 60);
-            document.getElementById("bus").innerHTML += `<li class='busItem'><span class='route icon'>${result["bustime-response"].prd[i].rt}</span><span class='eta'>${eta}m</span><span class='direction'>${result["bustime-response"].prd[i].rtdir}"</span></li>`;
+        console.log(result);
+        if (result["bustime-response"].hasOwnProperty("prd")) {
+            for (let i = 0; i < result["bustime-response"].prd.length; i++) {
+                const timeFromApi = result["bustime-response"].prd[i].prdtm;
+                const prdTime = new Date(timeFromApi.slice(0, 4) + "/" + timeFromApi.slice(4, 6) + "/" + timeFromApi.slice(6, 16));
+                const eta = Math.floor(Math.abs(prdTime.valueOf() - timeNow.valueOf()) / 1000 / 60);
+                document.getElementById("bus").innerHTML += `<li class='busItem'><span class='route icon'>${result["bustime-response"].prd[i].rt}</span><span class='eta'>${eta}m</span><span class='direction'>${result["bustime-response"].prd[i].rtdir}"</span></li>`;
+            }
         }
     });
-    
+
     document.getElementById("train").innerHTML = "";
-    for (let i = 0; i < trainStations.length; i++) {
-        fetch(`http://${serverAddress}/api/ctaTrain?train=${trainStations[i]}`).then((res): Promise<CtaTrainPredictions> => res.json()).then((result): void => {
+    for (let i = 0; i < config.ctaTrainStations.length; i++) {
+        fetch(`http://${serverAddress}/api/ctaTrain?train=${config.ctaTrainStations[i]}`).then((res): Promise<CtaTrainPredictions> => res.json()).then((result): void => {
+            console.log(result);
             const timeNow = new Date();
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);
@@ -123,10 +130,10 @@ export default function getData(): void {
             }
         });
     }
-    fetch(`http://${serverAddress}/api/weather?city=${city}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
+    fetch(`http://${serverAddress}/api/weather?city=${config.weatherCity}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
         const temp = result.main.temp;
         const tempF = Math.round(temp * 9 / 5 - 459.67);
         const tempC = Math.round(temp - 273.15);
-        document.getElementById("weather").innerHTML = `<i class='owi owi-${result.weather[0].icon}</i><p>${result.weather[0].main}</p><p>${tempF} &#176;F<br>${tempC} &#176;C</p>'>`
+        document.getElementById("weather").innerHTML = `<i class='owi owi-${result.weather[0].icon}'></i><p>${result.weather[0].main}</p><p>${tempF} &#176;F<br>${tempC} &#176;C</p>`
     });
 }

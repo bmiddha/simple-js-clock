@@ -1,3 +1,4 @@
+// TODO: Download fonts
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
@@ -162,7 +163,6 @@ body {
 }
 
 #cta {
-    // font-size: 0.8em;
     ul {
         list-style: none;
         clear: both;
@@ -224,8 +224,8 @@ body {
             background-color: #000000;
         }
         .eta {
-            // border-color: #03396c;
-            // color: #03396c;
+            border-color: #000000;
+            color: #000000;
         }
         li {
             display: none;
@@ -250,7 +250,6 @@ body {
             }
             .eventName {
                 font-size: 1.15em;
-                // text-decoration: underline;
                 margin-bottom: 5px;
             }
             .icon {

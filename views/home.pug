@@ -1,12 +1,13 @@
 extends layout
 
 block content
+  #offlineMode Offline Mode
   #time
   #date
   #weather
-    i#weather-icon
-    p#weather-condition
-    p#weather-temperature
+    i#weather-icon.owi.owi-04n
+    p#weather-condition Cloudy
+    p#weather-temperature 72 &#176;F<br> 32 &#176;C
   #messages
     p
     p Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eveniet pariatur sed expedita 
@@ -112,5 +113,45 @@ block content
     #transit
       #cta
         ul#bus
+          li.busItem
+            span.route.icon 8
+            span.eta 19m
+            span.direction Test
+          li.busItem
+            span.route.icon 8
+            span.eta 19m
+            span.direction Test
+          li.busItem
+            span.route.icon 8
+            span.eta 19m
+            span.direction Test
+          li.busItem
+            span.route.icon 8
+            span.eta 9m
+            span.direction Test
+          li.busItem
+            span.route.icon 8
+            span.eta 9m
+            span.direction Test
+          li.busItem
+            span.route.icon 8
+            span.eta 9m
+            span.direction Test
         ul#train
+          li.trainItem
+            i.fa.fa-train.icon(style='background-color: blue;')
+            span.eta(style='color: blue;border-color:blue;') 19m
+            span.direction O'Hare
+          li.trainItem
+            i.fa.fa-train.icon(style='background-color: blue;')
+            span.eta(style='color: blue;border-color:blue;') 19m
+            span.direction O'Hare
+          li.trainItem
+            i.fa.fa-train.icon(style='background-color: blue;')
+            span.eta(style='color: blue;border-color:blue;') 19m
+            span.direction O'Hare
+          li.trainItem
+            i.fa.fa-train.icon(style='background-color: blue;')
+            span.eta(style='color: blue;border-color:blue;') 19m
+            span.direction O'Hare
   script(src='/main.js')

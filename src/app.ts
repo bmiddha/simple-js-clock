@@ -24,6 +24,7 @@ app.use("/owi", express.static(path.join(__dirname, "../node_modules/open-weathe
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 
 app.get("/", homeController.index);
+app.get("/config", homeController.config);
 app.get("/api/ctaBus", ctaBusController.ctaBus);
 app.get("/api/ctaTrain", ctaTrainController.ctaTrain);
 app.get("/api/weather", openWeatherController.weather);

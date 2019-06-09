@@ -64,6 +64,26 @@ ul {
     }
 }
 
+// Config Form
+#configForm {
+    font-size: 0.5em;
+    label, input {
+        display: block;
+        margin: 10px;
+        color: inherit;
+    }
+    input {
+        background: none;
+        border: none;
+        border-bottom: 1px solid;
+        padding: 5px;
+        width: 500px;
+    }
+    input.btn {
+        border: 1px solid;
+    }
+}
+
 // Hide scrollbar
 body::-webkit-scrollbar {
     width: 0 !important;
@@ -85,7 +105,7 @@ body {
 }
 
 // Grid Layout
-.wrapper {
+.app {
     width: 1080px;
     height: 1920px;
     border: 1px solid #ffffff;
@@ -124,7 +144,7 @@ body {
     }
 }
 
-.wrapper {
+.app {
     padding: 25px;
 }
 

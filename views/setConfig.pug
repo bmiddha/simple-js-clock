@@ -1,23 +1,20 @@
 extends layout
 
 block content
-    form#configForm(action="/", method="get", target="_blank")
-        //- fieldset
-            //- legend Configure
-
-        label(for="config") Enable Config
-        input(type="checkbox", name="config")
-        br
-        label(for="ctabusstops") CTA Bus Stops (Add comma separated stop ids)
-        input(type="text" name="ctabusstops")
-        br
-        label(for="ctatrainstations") CTA Train Stations (Add comma separated station ids)
-        input(type="text" name="ctatrainstations")
-        br
-        label(for="weathercity") Weather City
-        input(type="text" name="weathercity")
-        br
-        label(for="eventcalendars") Event Calendars (Add comma separated calendar ids)
-        input(type="text" name="eventcalendars")
-        br
-        input(type="submit",value="Submit")
+    form#configForm(action="/config", method="get", target="_blank")
+        label(for="ctaBusStops") CTA Bus Stops (Add comma separated stop ids)
+        input(type="text" name="ctaBusStops")
+        label(for="ctaTrainStations") CTA Train Stations (Add comma separated station ids)
+        input(type="text" name="ctaTrainStations")
+        label(for="weatherCity") Weather City
+        input(type="text" name="weatherCity")
+        label(for="eventCalendars") Event Calendars (Add comma separated calendar ids)
+        input(type="text" name="eventCalendars")
+        input.btn(type="submit",value="Submit")
+    script.
+        const paramsString = window.location.href.split("?")[1];
+        const searchParams = new URLSearchParams(paramsString);
+        const formElement = document.getElementById("configForm").elements;
+        for (let p of searchParams) {
+            formElement[p[0]].value = p[1];
+        }

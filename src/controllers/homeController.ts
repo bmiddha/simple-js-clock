@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 interface ExplictAnyIndex {
-    [key:string]: any; // Add index signature
+    [key: string]: any; // Add index signature
 }
 
 const defaultConfig: ExplictAnyIndex = {
@@ -24,12 +24,6 @@ export let config = (req: Request, res: Response): void => {
         title: "Home"
     });
 }
-
-export let setConfig = (req: Request, res: Response): void => {
-    res.render("setConfig", {
-        title: "Set Config"
-    });
-};
 
 export let offline = (req: Request, res: Response): void => {
     res.render("home", {

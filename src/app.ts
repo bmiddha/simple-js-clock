@@ -25,6 +25,9 @@ app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }))
 
 app.get("/", homeController.index);
 app.get("/config", homeController.config);
+app.get("/offline", homeController.offline);
+app.get("/demo", homeController.demo);
+app.get("/setConfig", homeController.setConfig);
 app.get("/api/ctaBus", ctaBusController.ctaBus);
 app.get("/api/ctaTrain", ctaTrainController.ctaTrain);
 app.get("/api/weather", openWeatherController.weather);

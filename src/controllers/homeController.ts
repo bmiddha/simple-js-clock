@@ -4,7 +4,7 @@ interface ExplictAnyIndex {
     [key: string]: any; // Add index signature
 }
 
-const defaultConfig: ExplictAnyIndex = {
+export const defaultConfig: ExplictAnyIndex = {
     ctaBusStops: ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"],
     ctaTrainStations: ["40350"],
     weatherCity: "Chicago",

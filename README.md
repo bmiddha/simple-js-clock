@@ -28,8 +28,7 @@ Offline mode will disable api requests to the server leaving only the clock runn
 Demo mode works like offline mode but displays demo information instead of real data from apis. It can be activated by going to `/demo` path.
 
 ## Configuration
-To override the default config, you can use the URL GET parameters or use the `/setconfig` page.
-The `/setconfig` page reads GET parameters to fill in form values making it easy to edit existing configs by replacing `/config/?cta...` to `/setconfig/?cta...`
+To override the default config, you can use the URL GET parameters or by pressing `c` to open the config options.
 
 # Deployment on a Raspberry PI
 

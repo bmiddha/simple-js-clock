@@ -1,16 +1,43 @@
 extends layout
 
 block content
-  .app
-    #offlineMode.modeOverlay Offline Mode
-    #demoMode.modeOverlay Demo Mode
-    #time
-    #date
-    #weather
-    #messages
-    #switcher
-      #events
-      #transit
-        #cta
-          ul#bus
-          ul#train
+  #config
+    button.close(onClick="document.getElementById('config').style.display = 'none'") X
+    p Configuration
+    form#configForm(action="/config", method="get")
+      .textFields
+        label(for="ctaBusStops") CTA Bus Stops (Add comma separated stop ids)
+        input(type="text" name="ctaBusStops")
+        label(for="ctaTrainStations") CTA Train Stations (Add comma separated station ids)
+        input(type="text" name="ctaTrainStations")
+        label(for="weatherCity") Weather City
+        input(type="text" name="weatherCity")
+        label(for="eventCalendars") Event Calendars (Add comma separated calendar ids)
+        input(type="text" name="eventCalendars")
+      .buttonRow
+        input.btn(type="submit",value="Submit")
+        input.btn(type="reset",value="Clear")
+        input.btn(type="button",value="Load Defaults",onClick="window.location.href='/'")
+        input.btn(type="button",value="Offline Mode",onClick="window.location.href='/offline'")
+        input.btn(type="button",value="Demo Mode",onClick="window.location.href='/demo'")
+    script.
+        const paramsString = window.location.href.split("?")[1];
+        const searchParams = new URLSearchParams(paramsString);
+        const formElement = document.getElementById("configForm").elements;
+        for (let p of searchParams) {
+            formElement[p[0]].value = p[1];
+        }
+
+
+  #offlineMode.modeOverlay Offline Mode
+  #demoMode.modeOverlay Demo Mode
+  #time
+  #date
+  #weather
+  #messages
+  #switcher
+    #events
+    #transit
+      #cta
+        ul#bus
+        ul#train

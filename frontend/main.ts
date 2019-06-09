@@ -48,7 +48,7 @@ window.onload = (): void => {
     setInterval(switcher, 5000);
 
 
-    switch(mode) {
+    switch (mode) {
         case "demo":
             for (let key in demoData) {
                 document.getElementById(`${key}`).innerHTML = demoData[key];
@@ -60,5 +60,21 @@ window.onload = (): void => {
             getData();
             setInterval(getData, 60000);
             break;
+    }
+
+    window.onkeypress = (e): void => {
+        switch (e.code) {
+            case "KeyR":
+                window.location.reload();
+                break;
+            case "KeyD":
+                if (confirm("Are you sure that you want to load the default configuration?"))
+                    window.location.pathname = "/";
+                break;
+            case "KeyC":
+                const state = document.getElementById("config").style.display;
+                document.getElementById("config").style.display = (state === "block") ? "none" : "block";
+                break;
+        }
     }
 }

@@ -62,7 +62,7 @@ window.onload = (): void => {
             break;
     }
 
-    window.onkeypress = (e): void => {
+    document.onkeydown = (e): void => {
         switch (e.code) {
             case "KeyR":
                 window.location.reload();
@@ -72,8 +72,14 @@ window.onload = (): void => {
                     window.location.pathname = "/";
                 break;
             case "KeyC":
-                const state = document.getElementById("config").style.display;
-                document.getElementById("config").style.display = (state === "block") ? "none" : "block";
+                if (document.getElementById("config").style.display != "block") {
+                    document.getElementById("config").style.display = "block";
+                }
+                break;
+            case "Escape":
+                if (document.getElementById("config").style.display == "block") {
+                    document.getElementById("config").style.display = "none";
+                }
                 break;
         }
     }

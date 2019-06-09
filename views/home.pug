@@ -1,7 +1,8 @@
 extends layout
 
 block content
-  #offlineMode Offline Mode
+  #offlineMode.modeOverlay Offline Mode
+  #demoMode.modeOverlay Demo Mode
   #time
   #date
   #weather
@@ -10,7 +11,7 @@ block content
     p#weather-temperature 72 &#176;F<br> 32 &#176;C
   #messages
     p
-    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eveniet pariatur sed expedita 
+    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eveniet pariatur sed expedita
   #switcher
     #events
       ul

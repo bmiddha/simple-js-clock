@@ -1,13 +1,5 @@
-import { getData, Config } from "./getData";
-
+import { getData, clearData } from "./getData";
 import "./main.scss";
-
-const defaultConfig: Config = {
-    ctaBusStops: ["6700", "6627", "307", "332", "4640", "14487", "6347", "206"],
-    ctaTrainStations: ["40350"],
-    weatherCity: "Chicago",
-    eventCalendars: ["kc72g1ctfg8b88df34qqb62d1s@group.calendar.google.com"],
-}
 
 const timeElement = document.getElementById("time");
 const dateElement = document.getElementById("date");
@@ -35,31 +27,24 @@ function switcher(): void {
     counter++;
 }
 
-window.onload = (): void => {
-    const urlParams = new URLSearchParams(window.location.search);
 
+window.onload = (): void => {
+    const mode = window.location.pathname.substring(1);
     updateTime();
     switcher();
     setInterval(updateTime, 5000);
     setInterval(switcher, 5000);
 
-    if (urlParams.has("offline")) {
-        document.getElementById("offlineMode").style.display = "block";
-    } else {
-        document.getElementById("offlineMode").style.display = "none";
-        let config: Config = defaultConfig;
-        if (urlParams.has("config")) {
-            config = {
-                ctaBusStops: urlParams.get("ctabusstops").split(","),
-                ctaTrainStations: urlParams.get("ctatrainstations").split(","),
-                weatherCity: urlParams.get("weathercity"),
-                eventCalendars: urlParams.get("eventcalendars").split(","),
-            };
-            console.log("a", config);
-        }
-        getData(config);
-        console.log(config);
-        // TODO: Pass config parameter
-        setInterval(getData, 60000, config);
+
+    switch(mode) {
+        case "offline":
+            clearData();
+        case "demo":
+            document.getElementById(`${mode}Mode`).style.display = "block";
+            break;
+        default:
+            getData();
+            setInterval(getData, 60000);
+            break;
     }
 }

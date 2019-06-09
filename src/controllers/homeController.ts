@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 interface ExplictAnyIndex {
-    [key:string]: any; // Add index signature
+    [key: string]: any; // Add index signature
 }
 
 const defaultConfig: ExplictAnyIndex = {

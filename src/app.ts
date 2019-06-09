@@ -10,6 +10,8 @@ import * as homeController from "./controllers/homeController";
 import * as ctaBusController from "./controllers/ctaBusController";
 import * as ctaTrainController from "./controllers/ctaTrainController";
 import * as openWeatherController from "./controllers/openWeatherController";
+import * as eventsController from "./controllers/eventsController";
+import * as messagesController from "./controllers/messagesController";
 
 const app = express();
 app.set("port", process.env.PORT || 8080);
@@ -31,5 +33,7 @@ app.get("/setConfig", homeController.setConfig);
 app.get("/api/ctaBus", ctaBusController.ctaBus);
 app.get("/api/ctaTrain", ctaTrainController.ctaTrain);
 app.get("/api/weather", openWeatherController.weather);
+app.get("/api/events", eventsController.events);
+app.get("/api/messages", messagesController.messages);
 
 export default app;

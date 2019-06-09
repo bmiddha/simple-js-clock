@@ -20,6 +20,13 @@ A clock replacement for the office of ACM@UIC
 1. Run `npm run start` to start the npm server or `npm run watch` to watch for changes.
 2. Navigate the browser to `locahost:8080` or the port specified in the config.
 
+## Offline Mode
+
+Offline mode will disable api requests to the server leaving only the clock running. It can be activated by going to `/offline` path.
+
+## Demo Mode
+Demo mode works like offline mode but displays demo information instead of real data from apis. It can be activated by going to `/demo` path.
+
 # Deployment on a Raspberry PI
 
 ## Step 0: Install Packages

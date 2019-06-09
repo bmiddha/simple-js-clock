@@ -2,22 +2,15 @@ extends layout
 
 block content
     form#configForm(action="/config", method="get", target="_blank")
-        label(for="config") Enable Config
-        input(type="checkbox", name="config")
-        br
         label(for="ctaBusStops") CTA Bus Stops (Add comma separated stop ids)
         input(type="text" name="ctaBusStops")
-        br
         label(for="ctaTrainStations") CTA Train Stations (Add comma separated station ids)
         input(type="text" name="ctaTrainStations")
-        br
         label(for="weatherCity") Weather City
         input(type="text" name="weatherCity")
-        br
         label(for="eventCalendars") Event Calendars (Add comma separated calendar ids)
         input(type="text" name="eventCalendars")
-        br
-        input(type="submit",value="Submit")
+        input.btn(type="submit",value="Submit")
     script.
         const paramsString = window.location.href.split("?")[1];
         const searchParams = new URLSearchParams(paramsString);

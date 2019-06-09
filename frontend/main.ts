@@ -41,7 +41,7 @@ function switcher(): void {
 
 
 window.onload = (): void => {
-    const mode = window.location.pathname.substring(1);
+    const mode = window.location.pathname.split("/")[1];
     updateTime();
     switcher();
     setInterval(updateTime, 5000);

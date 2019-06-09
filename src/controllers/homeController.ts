@@ -25,12 +25,6 @@ export let config = (req: Request, res: Response): void => {
     });
 }
 
-export let setConfig = (req: Request, res: Response): void => {
-    res.render("setConfig", {
-        title: "Set Config"
-    });
-};
-
 export let offline = (req: Request, res: Response): void => {
     res.render("home", {
         title: "Home"

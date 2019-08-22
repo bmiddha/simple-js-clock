@@ -4,6 +4,7 @@ import cors from "cors";
 import path from "path";
 import compression from "compression";
 import bodyParser from "body-parser";
+import apicache from "apicache";
 
 dotenv.config();
 import * as homeController from "./controllers/homeController";
@@ -14,6 +15,9 @@ import * as eventsController from "./controllers/eventsController";
 import * as messagesController from "./controllers/messagesController";
 
 const app = express();
+
+let cache = apicache.middleware;
+
 app.set("port", process.env.PORT || 8080);
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
@@ -24,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/owi", express.static(path.join(__dirname, "../node_modules/open-weather-icons/dist"), { maxAge: 31557600000 }));
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
+app.use("/api/*", cache('1 minute'));
 
 app.get("/", homeController.index);
 app.get("/config", homeController.config);

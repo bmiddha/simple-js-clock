@@ -1,0 +1,23 @@
+name: Docker CD
+
+on: release
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: registry-login
+      uses: actions/docker/login@master
+      env:
+        DOCKER_REGISTRY_URL: docker.pkg.github.com
+        DOCKER_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+    - name: build-image
+      uses: actions/docker/cli@master
+      with:
+        args: build -t docker.pkg.github.com/${{ github.repository }}/app:${{ github.release }} .
+    - name: push-image
+      uses: actions/docker/cli@master
+      with:
+        args: push docker.pkg.github.com/${{ github.repository }}/app:${{ github.release }}

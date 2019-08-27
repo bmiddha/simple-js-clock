@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  clock:
+    image: "bmiddha/simple-js-clock:latest"
+    ports: 
+      - ${PORT}:8080
+    env_file:
+      - .env

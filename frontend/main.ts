@@ -43,9 +43,11 @@ function switcher(): void {
 window.onload = (): void => {
     const mode = window.location.pathname.split("/")[1];
     updateTime();
-    switcher();
     setInterval(updateTime, 5000);
-    setInterval(switcher, 5000);
+    if (switcherElements.length > 1) {
+        switcher();
+        setInterval(switcher, 10000);
+    }
 
     switch (mode) {
         case "demo":

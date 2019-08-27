@@ -9,3 +9,5 @@ services:
       - .env
     environment:
       - PORT=8080
+    volumes:
+      - ${SSL_DIR}:/usr/src/app/ssl

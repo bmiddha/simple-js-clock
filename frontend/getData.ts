@@ -114,7 +114,7 @@ export function clearData(elementSelector?: string): void {
 }
 
 export function getData(): void {
-    const serverAddress = window.location.host;
+    const { origin } = window.location;
     const urlParams = new URLSearchParams(window.location.search);
     const config = {
         ctaBusStops: urlParams.get("ctaBusStops"),
@@ -124,7 +124,7 @@ export function getData(): void {
     };
 
     clearData("#bus");
-    fetch(`http://${serverAddress}/api/ctaBus?bus=${config.ctaBusStops}`).then((res): Promise<CtaBusPredictions> => res.json()).then((result): void => {
+    fetch(`${origin}/api/ctaBus?bus=${config.ctaBusStops}`).then((res): Promise<CtaBusPredictions> => res.json()).then((result): void => {
         const timeNow = new Date();
         if (result["bustime-response"].hasOwnProperty("prd")) {
             for (let i = 0; i < result["bustime-response"].prd.length; i++) {
@@ -144,7 +144,7 @@ export function getData(): void {
 
     clearData("#train");
     config.ctaTrainStations.split(",").forEach((ele): void => {
-        fetch(`http://${serverAddress}/api/ctaTrain?train=${ele}`).then((res): Promise<CtaTrainPredictions> => res.json()).then((result): void => {
+        fetch(`${origin}/api/ctaTrain?train=${ele}`).then((res): Promise<CtaTrainPredictions> => res.json()).then((result): void => {
             const timeNow = new Date();
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);
@@ -156,7 +156,7 @@ export function getData(): void {
     });
 
     clearData("#weather");
-    fetch(`http://${serverAddress}/api/weather?city=${config.weatherCity}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
+    fetch(`${origin}/api/weather?city=${config.weatherCity}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
         const temp = result.main.temp;
         const tempF = Math.round(temp * 9 / 5 - 459.67);
         const tempC = Math.round(temp - 273.15);

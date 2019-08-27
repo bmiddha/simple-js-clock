@@ -4,7 +4,7 @@ services:
   clock:
     image: "bmiddha/simple-js-clock:latest"
     ports: 
-      - 8080:${PORT}
+      - ${PORT}:8080
     env_file:
       - .env
     environment:

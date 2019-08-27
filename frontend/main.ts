@@ -79,7 +79,7 @@ window.onload = (): void => {
         }
     }
 
-    setInterval(() => {
+    setInterval((): void => {
         window.location.reload();
     }, 7200000); 
 }

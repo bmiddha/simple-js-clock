@@ -47,7 +47,6 @@ window.onload = (): void => {
     setInterval(updateTime, 5000);
     setInterval(switcher, 5000);
 
-
     switch (mode) {
         case "demo":
             for (let key in demoData) {
@@ -62,7 +61,7 @@ window.onload = (): void => {
             break;
     }
 
-    window.onkeypress = (e): void => {
+    window.onkeydown = (e: KeyboardEvent): void => {
         switch (e.code) {
             case "KeyR":
                 window.location.reload();
@@ -72,9 +71,15 @@ window.onload = (): void => {
                     window.location.pathname = "/";
                 break;
             case "KeyC":
-                const state = document.getElementById("config").style.display;
-                document.getElementById("config").style.display = (state === "block") ? "none" : "block";
+                document.getElementById("config").style.display = "block";
+                break;
+            case "Escape":
+                document.getElementById("config").style.display = "none";
                 break;
         }
     }
+
+    setInterval(() => {
+        window.location.reload();
+    }, 7200000); 
 }

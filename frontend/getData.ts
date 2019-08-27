@@ -116,7 +116,6 @@ export function clearData(elementSelector?: string): void {
 export function getData(): void {
     const serverAddress = window.location.host;
     const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams.get("eventCalendars"));
     const config = {
         ctaBusStops: urlParams.get("ctaBusStops"),
         ctaTrainStations: urlParams.get("ctaTrainStations"),
@@ -127,7 +126,6 @@ export function getData(): void {
     clearData("#bus");
     fetch(`http://${serverAddress}/api/ctaBus?bus=${config.ctaBusStops}`).then((res): Promise<CtaBusPredictions> => res.json()).then((result): void => {
         const timeNow = new Date();
-        console.log(result);
         if (result["bustime-response"].hasOwnProperty("prd")) {
             for (let i = 0; i < result["bustime-response"].prd.length; i++) {
                 const timeFromApi = result["bustime-response"].prd[i].prdtm;
@@ -147,7 +145,6 @@ export function getData(): void {
     clearData("#train");
     config.ctaTrainStations.split(",").forEach((ele): void => {
         fetch(`http://${serverAddress}/api/ctaTrain?train=${ele}`).then((res): Promise<CtaTrainPredictions> => res.json()).then((result): void => {
-            console.log(result);
             const timeNow = new Date();
             for (let j = 0; j < result.ctatt.eta.length; j++) {
                 const prdTime = new Date(result.ctatt.eta[j].arrT);

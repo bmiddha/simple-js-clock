@@ -10,7 +10,7 @@ dotenv.config();
 import * as homeController from "./controllers/homeController";
 import * as ctaBusController from "./controllers/ctaBusController";
 import * as ctaTrainController from "./controllers/ctaTrainController";
-import * as openWeatherController from "./controllers/openWeatherController";
+import * as weatherController from "./controllers/weatherController";
 import * as eventsController from "./controllers/eventsController";
 import * as messagesController from "./controllers/messagesController";
 
@@ -26,7 +26,6 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/owi", express.static(path.join(__dirname, "../node_modules/open-weather-icons/dist"), { maxAge: 31557600000 }));
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 app.use("/api/*", cache('1 minute'));
 
@@ -36,7 +35,7 @@ app.get("/offline", homeController.offline);
 app.get("/demo", homeController.demo);
 app.get("/api/ctaBus", ctaBusController.ctaBus);
 app.get("/api/ctaTrain", ctaTrainController.ctaTrain);
-app.get("/api/weather", openWeatherController.weather);
+app.get("/api/weather", weatherController.weather);
 app.get("/api/events", eventsController.events);
 app.get("/api/messages", messagesController.messages);
 

@@ -35,7 +35,6 @@
     "express": "^4.17.1",
     "googleapis": "^40.0.1",
     "node-fetch": "^2.6.0",
-    "open-weather-icons": "0.0.8",
     "path": "^0.12.7",
     "pug": "^2.0.4"
   },

@@ -13,9 +13,9 @@ body {
     color: #ffffff;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
-    // -webkit-animation: Gradient 15s ease infinite;
-    // -moz-animation: Gradient 15s ease infinite;
-    // animation: Gradient 15s ease infinite;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
 }
 
 a {
@@ -133,9 +133,9 @@ body {
     height: 1920px;
     border: 1px solid #ffffff;
     display: grid;
-    grid-template-areas: 'time time time weather' 'date date date weather' 'messages messages messages messages' 'switcher switcher switcher switcher' 'footer footer footer footer';
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 0.85fr 0.3fr 0.9fr 4.1fr 0.18fr;
+    grid-template-areas: 'time time time weather weather' 'date date date date date' 'messages messages messages messages messages' 'switcher switcher switcher switcher switcher' 'footer footer footer footer footer';
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.75fr 0.3fr 0.9fr 4.1fr 0.18fr;
     #time {
         grid-area: time;
     }
@@ -182,6 +182,7 @@ body {
 #weather {
     font-size: 1.5em;
     text-align: right;
+    margin-top: 35px;
     i,
     p {
         display: block;

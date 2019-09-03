@@ -6,7 +6,7 @@ A clock replacement for the office of ACM@UIC
 
 * Time and Date
 * CTA Bus and Train Arrival Times
-* Weather from OpenWeatherMap
+* Weather from DarkSky
 
 ## Using with docker
 

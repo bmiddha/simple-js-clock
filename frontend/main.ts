@@ -11,9 +11,9 @@ interface StringIndexes {
 }
 
 const demoData: StringIndexes = {
-    "bus": '<li class=busItem><span class="icon route">8</span><span class=eta>19m</span><span class=direction>Test</span><li class=busItem><span class="icon route">8</span><span class=eta>19m</span><span class=direction>Test</span><li class=busItem><span class="icon route">8</span><span class=eta>19m</span><span class=direction>Test</span><li class=busItem><span class="icon route">8</span><span class=eta>9m</span><span class=direction>Test</span><li class=busItem><span class="icon route">8</span><span class=eta>9m</span><span class=direction>Test</span><li class=busItem><span class="icon route">8</span><span class=eta>9m</span><span class=direction>Test</span>',
-    "train": '<li class=trainItem><i class="fa fa-train icon"style=background-color:#00f></i><span class=eta style=color:#00f;border-color:#00f>19m</span><span class=direction>O\'Hare</span><li class=trainItem><i class="fa fa-train icon"style=background-color:#00f></i><span class=eta style=color:#00f;border-color:#00f>19m</span><span class=direction>O\'Hare</span><li class=trainItem><i class="fa fa-train icon"style=background-color:#00f></i><span class=eta style=color:#00f;border-color:#00f>19m</span><span class=direction>O\'Hare</span><li class=trainItem><i class="fa fa-train icon"style=background-color:#00f></i><span class=eta style=color:#00f;border-color:#00f>19m</span><span class=direction>O\'Hare</span>',
-    "weather": '<i class="owi owi-04n"id=weather-icon></i><p id=weather-condition>Cloudy<p id=weather-temperature>72 °F<br>32 °C',
+    "bus": '<li class="busItem"><span class="route icon">60</span><span class="eta">6m</span><span class="direction">Westbound"</span></li><li class="busItem"><span class="route icon">8</span><span class="eta">8m</span><span class="direction">Southbound"</span></li><li class="busItem"><span class="route icon">7</span><span class="eta">10m</span><span class="direction">Westbound"</span></li><li class="busItem"><span class="route icon">12</span><span class="eta">11m</span><span class="direction">Westbound"</span></li><li class="busItem"><span class="route icon">8</span><span class="eta">13m</span><span class="direction">Northbound"</span></li><li class="busItem"><span class="route icon">12</span><span class="eta">19m</span><span class="direction">Eastbound"</span></li><li class="busItem"><span class="route icon">8</span><span class="eta">24m</span><span class="direction">Southbound"</span></li><li class="busItem"><span class="route icon">60</span><span class="eta">6m</span><span class="direction">Westbound"</span></li><li class="busItem"><span class="route icon">8</span><span class="eta">8m</span><span class="direction">Southbound"</span></li><li class="busItem"><span class="route icon">7</span><span class="eta">10m</span><span class="direction">Westbound"</span></li><li class="busItem"><span class="route icon">12</span><span class="eta">11m</span><span class="direction">Westbound"</span></li><li class="busItem"><span class="route icon">8</span><span class="eta">13m</span><span class="direction">Northbound"</span></li><li class="busItem"><span class="route icon">12</span><span class="eta">19m</span><span class="direction">Eastbound"</span></li><li class="busItem"><span class="route icon">8</span><span class="eta">24m</span><span class="direction">Southbound"</span></li>',
+    "train": `<li class="trainItem"><i class="fa fa-train icon" style="background-color:#03396c;"></i><span class="eta" style="color:#03396c;border-color:#03396c;">3m</span><span class="direction">Forest Park</span></li><li class="trainItem"><i class="fa fa-train icon" style="background-color:#03396c;"></i><span class="eta" style="color:#03396c;border-color:#03396c;">6m</span><span class="direction">O'Hare</span></li><li class="trainItem"><i class="fa fa-train icon" style="background-color:#03396c;"></i><span class="eta" style="color:#03396c;border-color:#03396c;">15m</span><span class="direction">Forest Park</span></li><li class="trainItem"><i class="fa fa-train icon" style="background-color:#03396c;"></i><span class="eta" style="color:#03396c;border-color:#03396c;">15m</span><span class="direction">Forest Park</span></li><li class="trainItem"><i class="fa fa-train icon" style="background-color:#03396c;"></i><span class="eta" style="color:#03396c;border-color:#03396c;">19m</span><span class="direction">O'Hare</span></li>`,
+    "weather": '<p>Overcast</p><p>13 °F | 25 °C</p>',
     "messages": '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eveniet pariatur sed expedita</p>',
     "events": '<ul><li class="event happeningNow"><div class=eventName><span>Test Event 1</span></div><div class=eventDate><i class="fas icon fa-calendar-alt"></i><span>May 25</span></div><div class=eventTime><i class="fas icon fa-clock"></i><span>02:00 PM - 04:00 PM</span></div><div class=eventLocation><i class="fas icon fa-map-marker-alt"></i><span>SELE 2264</span></div><li class=event><div class=eventName><span>Test Event 2</span></div><div class=eventDate><i class="fas icon fa-calendar-alt"></i><span>May 25</span></div><div class=eventTime><i class="fas icon fa-clock"></i><span>02:00 PM - 04:00 PM</span></div><div class=eventLocation><i class="fas icon fa-map-marker-alt"></i><span>SELE 2264</span></div><li class=event><div class=eventName><span>Test Event 3</span></div><div class=eventDate><i class="fas icon fa-calendar-alt"></i><span>May 25</span></div><div class=eventTime><i class="fas icon fa-clock"></i><span>02:00 PM - 04:00 PM</span></div><div class=eventLocation><i class="fas icon fa-map-marker-alt"></i><span>SELE 2264</span></div><li class=event><div class=eventName><span>Test Event 4</span></div><div class=eventDate><i class="fas icon fa-calendar-alt"></i><span>May 25</span></div><div class=eventTime><i class="fas icon fa-clock"></i><span>02:00 PM - 04:00 PM</span></div><div class=eventLocation><i class="fas icon fa-map-marker-alt"></i><span>SELE 2264</span></div><li class=event><div class=eventName><span>Test Event 5</span></div><div class=eventDate><i class="fas icon fa-calendar-alt"></i><span>May 25</span></div><div class=eventTime><i class="fas icon fa-clock"></i><span>02:00 PM - 04:00 PM</span></div><div class=eventLocation><i class="fas icon fa-map-marker-alt"></i><span>SELE 2264</span></div><li class=event><div class=eventName><span>Test Event 6</span></div><div class=eventDate><i class="fas icon fa-calendar-alt"></i><span>May 25</span></div><div class=eventTime><i class="fas icon fa-clock"></i><span>02:00 PM - 04:00 PM</span></div><div class=eventLocation><i class="fas icon fa-map-marker-alt"></i><span>SELE 2264</span></div><li class=event><div class=eventName><span>Test Event 7</span></div><div class=eventDate><i class="fas icon fa-calendar-alt"></i><span>May 25</span></div><div class=eventTime><i class="fas icon fa-clock"></i><span>02:00 PM - 04:00 PM</span></div><div class=eventLocation><i class="fas icon fa-map-marker-alt"></i><span>SELE 2264</span></div><li class=event><div class=eventName><span>Test Event 8</span></div><div class=eventDate><i class="fas icon fa-calendar-alt"></i><span>May 25</span></div><div class=eventTime><i class="fas icon fa-clock"></i><span>02:00 PM - 04:00 PM</span></div><div class=eventLocation><i class="fas icon fa-map-marker-alt"></i><span>SELE 2264</span></div></ul>'
 }
@@ -44,23 +44,32 @@ window.onload = (): void => {
     const mode = window.location.pathname.split("/")[1];
     updateTime();
     setInterval(updateTime, 5000);
-    switcher();
-    if (switcherElements.length > 1) {
-        setInterval(switcher, 10000);
-    }
+    
 
     switch (mode) {
         case "demo":
             for (let key in demoData) {
-                document.getElementById(`${key}`).innerHTML = demoData[key];
+                let element = document.getElementById(`${key}`);
+                if (!element) {
+                    const div = document.createElement('div');
+                    div.setAttribute('id', key);
+                    document.querySelector('#switcher').appendChild(div);
+                    element = document.getElementById(`${key}`);
+                }
+                element.innerHTML = demoData[key];
             }
         case "offline":
             document.getElementById(`${mode}Mode`).style.display = "block";
             break;
         default:
             getData();
-            setInterval(getData, 60000);
+            setInterval(getData, 120000);
             break;
+    }
+
+    switcher();
+    if (switcherElements.length > 1) {
+        setInterval(switcher, 10000);
     }
 
     window.onkeydown = (e: KeyboardEvent): void => {

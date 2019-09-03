@@ -76,28 +76,38 @@ interface CtaTrainPredictions {
     };
 }
 
-interface Weather {
-    "id": number;
-    "main": string;
-    "description": string;
-    "icon": string;
-}
-
 interface WeatherForecast {
-    "weather": Weather[];
-    "main": {
-        "temp": number;
-        "pressure": number;
+    "latitude": number;
+    "longitude": number;
+    "timezone": string;
+    "currently": {
+        "time": number;
+        "summary": string;
+        "icon": string;
+        "nearestStormDistance": number;
+        "nearestStormBearing": number;
+        "precipIntensity": number;
+        "precipProbability": number;
+        "temperature": number;
+        "apparentTemperature": number;
+        "dewPoint": number;
         "humidity": number;
-        "temp_min": number;
-        "temp_max": number;
+        "pressure": number;
+        "windSpeed": number;
+        "windGust": number;
+        "windBearing": number;
+        "cloudCover": number;
+        "uvIndex": number;
+        "visibility": number;
+        "ozone": number;
     };
+    "offset": number;
 }
 
 export interface Config {
     "ctaBusStops"?: string[];
     "ctaTrainStations"?: string[];
-    "weatherCity"?: string;
+    "weatherLatLong"?: string;
     "eventCalendars"?: string[];
 }
 
@@ -119,7 +129,7 @@ export function getData(): void {
     const config = {
         ctaBusStops: urlParams.get("ctaBusStops"),
         ctaTrainStations: urlParams.get("ctaTrainStations"),
-        weatherCity: urlParams.get("weatherCity"),
+        weatherLatLong: urlParams.get("weatherLatLong"),
         eventCalendars: urlParams.get("eventCalendars"),
     };
 
@@ -156,10 +166,10 @@ export function getData(): void {
     });
 
     clearData("#weather");
-    fetch(`${origin}/api/weather?city=${config.weatherCity}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
-        const temp = result.main.temp;
-        const tempF = Math.round(temp * 9 / 5 - 459.67);
-        const tempC = Math.round(temp - 273.15);
-        document.getElementById("weather").innerHTML = `<i class='owi owi-${result.weather[0].icon}'></i><p>${result.weather[0].main}</p><p>${tempF} &#176;F<br>${tempC} &#176;C</p>`
+    fetch(`${origin}/api/weather?weatherLatLong=${config.weatherLatLong}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
+        const temp = result.currently.apparentTemperature;
+        const tempF = Math.round(temp * 9 / 5 - 32);
+        const tempC = Math.round(temp);
+        document.getElementById("weather").innerHTML = `<p>${result.currently.summary}</p><p>${tempF} &#176;F | ${tempC} &#176;C</p>`;
     });
 }

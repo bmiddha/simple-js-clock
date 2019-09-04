@@ -168,7 +168,7 @@ export function getData(): void {
     clearData("#weather");
     fetch(`${origin}/api/weather?weatherLatLong=${config.weatherLatLong}`).then((res): Promise<WeatherForecast> => res.json()).then((result): void => {
         const temp = result.currently.apparentTemperature;
-        const tempF = Math.round(temp * 9 / 5 - 32);
+        const tempF = Math.round((temp * 9 / 5) + 32);
         const tempC = Math.round(temp);
         document.getElementById("weather").innerHTML = `<p>${result.currently.summary}</p><p>${tempF} &#176;F | ${tempC} &#176;C</p>`;
     });

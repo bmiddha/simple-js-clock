@@ -15,6 +15,11 @@ A clock replacement for the office of ACM@UIC
 3. Create a `.env` file based on `.env.example`.
 4. Run `docker-compose up -d` (Run `docker build -t bmiddha/simple-js-clock:latest` before to include local changes).
 
+`docker run` command
+```
+docker run -e HTTPS="false" -e KEY="/root/ssl/ssl.key" -e CERT="/root/ssl/ssl.crt" -e PORT="8080" -e CTA_TRAIN_API_KEY="82c43bcdd4814d328fee2c175230dd5d" -e CTA_BUS_API_KEY="iUwkkVCZweRugTAi6AxCrBXvd" -e METRA_TRAIN_ID="8a3eb7d0e90f053318b37002c21e2e26" -e METRA_TRAIN_SECRET="224b391d41749621bb2ccc4f97e108ff" -e DARK_SKY_API_KEY="9bd3cc7065798472aed0a5150fd122c4" -e COLORS="303030 01579B 006064 304FFE 004D40" -e BUS_STOPS="6700 6627 307 332 4640 14487 6347 206" -e TRAIN_STATIONS="40350" -e WEATHER_LAT_LONG="37.8267,-122.4233" -e UNITS="both" bmiddha/simple-js-clock
+ ```
+
 ## Installation
 
 1. Clone the repository.

@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-js-clock
+spec:
+  containers:
+    - name: simple-js-clock
+      image: bmiddha/simple-js-clock:latest
+      ports:
+        - containerPort: 8080
+      env:
+        - name: PORT
+          value: "8080"
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: simplejsclock
+  annotations:
+    # use the shared ingress-nginx
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: clock.pods.devpods.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: clock
+          servicePort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clock
+spec:
+  selector:
+    app: simple-js-clock
+  ports:
+  - port: 80
+    targetPort: 8080

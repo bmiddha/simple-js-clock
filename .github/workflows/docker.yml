@@ -1,4 +1,4 @@
-name: Docker CD
+name: Docker CI
 
 on: push
 
@@ -7,33 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: registry-login
-      uses: actions/docker/login@master
-      env:
-        DOCKER_REGISTRY_URL: docker.pkg.github.com
-        DOCKER_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
     - name: build-image
-      uses: actions/docker/cli@master
-      with:
-        args: build -t docker.pkg.github.com/${{ github.repository }}/app .
-    - name: push-image
-      uses: actions/docker/cli@master
-      with:
-        args: push docker.pkg.github.com/${{ github.repository }}/app
-    - name: tag-image
-      uses: actions/docker/cli@master
-      with:
-        args: tag docker.pkg.github.com/${{ github.repository }}/app docker.pkg.github.com/${{ github.repository }}/main
-    - name: push-image
-      uses: actions/docker/cli@master
-      with:
-        args: push docker.pkg.github.com/${{ github.repository }}/main
-    - name: tag-image
-      uses: actions/docker/cli@master
-      with:
-        args: tag docker.pkg.github.com/${{ github.repository }}/main docker.pkg.github.com/${{ github.repository }}/simple-js-clock
-    - name: push-image
-      uses: actions/docker/cli@master
-      with:
-        args: push docker.pkg.github.com/${{ github.repository }}/simple-js-clock
+      run: docker build .

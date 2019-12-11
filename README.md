@@ -1,3 +1,5 @@
+_This project is archived. Project tempus https://github.com/bmiddha/tempus will continue the legacy of this project._
+
 # Simple JS (Now in Typescript) Clock
 
 A clock replacement for the office of ACM@UIC
